@@ -60,7 +60,7 @@ def login():
                     rx.container(height='20px'), 
                     rx.text(
                         "Forgot your password? ",
-                        rx.link("Find password!", href="/signup", color="blue.500"),
+                        rx.link("Find password!", href="/findpassword", color="blue.500"),
                         color="gray.600",
                     ), 
                     rx.text(

@@ -65,8 +65,8 @@ export default function Component() {
 </Fragment>
   <Container centerContent={true} sx={{"background": "linear-gradient(to bottom, #4e8be6, #e04a3f)", "maxWidth": "auto", "maxHeight": "auto", "height": "100vh"}}>
   <Container sx={{"height": "200px"}}/>
-  <VStack sx={{"width": "500px", "height": "auto", "centerContent": true, "borderRadius": "20px", "boxShadow": "9px 9px 50px #ceddf5", "bg": "rgb(255 255 255)"}}>
-  <Heading sx={{"display": "flex", "flexDirection": "column", "alignItems": "center", "textAlign": "center"}}>
+  <VStack sx={{"width": "500px", "height": "auto", "centerContent": true, "borderRadius": "20px", "boxShadow": "9px 9px 100px #79d0ed", "bg": "rgb(255 255 255)"}}>
+  <Heading>
   <Text sx={{"fontSize": "40px", "fontWeight": "bolder", "letterSpacing": "5px", "fontFamily": "Open Sans,Sans-serif", "background": "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)", "-webkit-background-clip": "text", "color": "transparent", "centerContent": true}}>
   {`Aurora`}
 </Text>
@@ -75,31 +75,20 @@ export default function Component() {
   {`Create a picture with your story!`}
 </Text>
   <Container sx={{"height": "30px"}}/>
-  <Container>
-  <VStack>
-  <Container centerContent={true} sx={{"alignItems": "left", "bg": "white", "border": "1px solid #eaeaea", "p": 4, "maxWidth": "400px", "borderRadius": "lg"}}>
+  <Container sx={{"alignItems": "left", "bg": "white", "border": "1px solid #eaeaea", "p": 4, "maxWidth": "400px", "borderRadius": "lg"}}>
   <Input onBlur={(_e0) => addEvents([Event("state.auth_state.set_username", {value:_e0.target.value})], (_e0), {})} placeholder={`Username`} sx={{"mb": 4}} type={`text`}/>
-  <Input onBlur={(_e0) => addEvents([Event("state.auth_state.set_password", {value:_e0.target.value})], (_e0), {})} placeholder={`Password`} sx={{"mb": 4}} type={`password`}/>
-  <Button onClick={(_e) => addEvents([Event("state.auth_state.login", {})], (_e), {})} sx={{"bg": "blue.500", "color": "white", "_hover": {"bg": "blue.600"}}}>
-  {`Log in`}
+  <Button onClick={(_e) => addEvents([Event("state.auth_state.findpassword", {})], (_e), {})} sx={{"bg": "blue.500", "color": "white", "_hover": {"bg": "blue.600"}}}>
+  {`Find Password`}
 </Button>
 </Container>
   <Container sx={{"height": "20px"}}/>
   <Text sx={{"color": "gray.600"}}>
-  {`Forgot your password? `}
-  <Link as={NextLink} href={`/findpassword`} sx={{"color": "blue.500"}}>
-  {`Find password!`}
-</Link>
-</Text>
-  <Text sx={{"color": "gray.600"}}>
-  {`Don't have an account yet? `}
-  <Link as={NextLink} href={`/signup`} sx={{"color": "blue.500"}}>
-  {`Sign up here`}
+  {`Already have an account? `}
+  <Link as={NextLink} href={`/`} sx={{"color": "blue.500"}}>
+  {`Sign in here.`}
 </Link>
 </Text>
   <Container sx={{"height": "30px"}}/>
-</VStack>
-</Container>
 </VStack>
 </Container>
   <NextHead>
