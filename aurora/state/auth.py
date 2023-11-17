@@ -39,8 +39,9 @@ class AuthState(State):
     def findpassword(self):
         """find a password."""
         with rx.session() as session:
-            if session.exec(User.select.where(User.username == self.username)).first():
-                return rx.redirect("/findpassword")
+            user_instance = session.exec(User.select.where(User.username == self.username)).first()
+            if user_instance:
+                return rx.window_alert(user_instance.password)
             session.expire_on_commit = False
             return rx.redirect("/")
     
