@@ -68,7 +68,7 @@ export default function Component() {
   <VStack sx={{"width": "500px", "height": "auto", "centerContent": true, "borderRadius": "20px", "boxShadow": "9px 9px 50px #ceddf5", "bg": "rgb(255 255 255)"}}>
   <Heading sx={{"display": "flex", "flexDirection": "column", "alignItems": "center", "textAlign": "center"}}>
   <Text sx={{"fontSize": "40px", "fontWeight": "bolder", "letterSpacing": "5px", "fontFamily": "Open Sans,Sans-serif", "background": "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)", "-webkit-background-clip": "text", "color": "transparent", "centerContent": true}}>
-  {`Aurora!`}
+  {`Aurora`}
 </Text>
 </Heading>
   <Text sx={{"color": "gray.500", "fontWeight": "medium"}}>
@@ -86,9 +86,15 @@ export default function Component() {
 </Container>
   <Container sx={{"height": "20px"}}/>
   <Text sx={{"color": "gray.600"}}>
+  {`Forgot your password? `}
+  <Link as={NextLink} href={`/signup`} sx={{"color": "blue.500"}}>
+  {`Find password!`}
+</Link>
+</Text>
+  <Text sx={{"color": "gray.600"}}>
   {`Don't have an account yet? `}
   <Link as={NextLink} href={`/signup`} sx={{"color": "blue.500"}}>
-  {`Sign up here.`}
+  {`Sign up here`}
 </Link>
 </Text>
   <Container sx={{"height": "30px"}}/>

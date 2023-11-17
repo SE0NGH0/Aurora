@@ -3,14 +3,13 @@ import reflex as rx
 
 from aurora.state.auth import AuthState
 
-
 def login():
     return rx.container(
         rx.container(height='200px'), 
         rx.vstack(           
             rx.heading(
                 rx.text(
-                    "Aurora!",
+                    "Aurora",
                     style={
                         "fontSize": "40px",
                         "fontWeight": "bolder",
@@ -60,8 +59,13 @@ def login():
                     ),
                     rx.container(height='20px'), 
                     rx.text(
+                        "Forgot your password? ",
+                        rx.link("Find password!", href="/signup", color="blue.500"),
+                        color="gray.600",
+                    ), 
+                    rx.text(
                         "Don't have an account yet? ",
-                        rx.link("Sign up here.", href="/signup", color="blue.500"),
+                        rx.link("Sign up here", href="/signup", color="blue.500"),
                         color="gray.600",
                     ),   
                     rx.container(height='30px'),         
