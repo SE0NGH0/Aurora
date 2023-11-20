@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Button, Container, Heading, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
+import { Button, Container, Heading, Image, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
 import NextLink from "next/link"
 import NextHead from "next/head"
@@ -63,10 +63,11 @@ export default function Component() {
   <Fragment/>
 )}
 </Fragment>
-  <Container centerContent={true} sx={{"background": "linear-gradient(to bottom, #4e8be6, #e04a3f)", "maxWidth": "auto", "maxHeight": "auto", "height": "100vh"}}>
-  <Container sx={{"height": "200px"}}/>
-  <VStack sx={{"width": "500px", "height": "auto", "centerContent": true, "borderRadius": "20px", "boxShadow": "9px 9px 50px #ceddf5", "bg": "rgb(255 255 255)"}}>
+  <Container centerContent={true} sx={{"background-image": "url('/aurora.jpg')", "background-size": "cover", "maxWidth": "auto", "maxHeight": "auto", "height": "100vh"}}>
+  <Container sx={{"height": "150px"}}/>
+  <VStack sx={{"width": "500px", "height": "auto", "centerContent": true, "borderRadius": "20px", "boxShadow": "9px 9px 100px #79d0ed", "background": "linear-gradient(to bottom, #d7eefc, #ffffff)"}}>
   <Heading sx={{"display": "flex", "flexDirection": "column", "alignItems": "center", "textAlign": "center"}}>
+  <Container sx={{"height": "30px"}}/>
   <Text sx={{"fontSize": "40px", "fontWeight": "bolder", "letterSpacing": "5px", "fontFamily": "Open Sans,Sans-serif", "background": "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)", "-webkit-background-clip": "text", "color": "transparent", "centerContent": true}}>
   {`Aurora`}
 </Text>
@@ -74,7 +75,9 @@ export default function Component() {
   <Text sx={{"color": "gray.500", "fontWeight": "medium"}}>
   {`Create a picture with your story!`}
 </Text>
-  <Container sx={{"height": "30px"}}/>
+  <Container centerContent={true}>
+  <Image src={`/Mosaic.ico`} sx={{"width": "100px", "height": "100px"}}/>
+</Container>
   <Container>
   <VStack>
   <Container centerContent={true} sx={{"alignItems": "left", "bg": "white", "border": "1px solid #eaeaea", "p": 4, "maxWidth": "400px", "borderRadius": "lg"}}>
@@ -84,17 +87,17 @@ export default function Component() {
   {`Log in`}
 </Button>
 </Container>
-  <Container sx={{"height": "20px"}}/>
+  <Container sx={{"height": "10px"}}/>
   <Text sx={{"color": "gray.600"}}>
-  {`Forgot your password? `}
+  {`Forgot your password?   `}
   <Link as={NextLink} href={`/findpassword`} sx={{"color": "blue.500"}}>
-  {`Find password!`}
+  {`Find Password!`}
 </Link>
 </Text>
   <Text sx={{"color": "gray.600"}}>
-  {`Don't have an account yet? `}
+  {`Don't have an account yet?   `}
   <Link as={NextLink} href={`/signup`} sx={{"color": "blue.500"}}>
-  {`Sign up here`}
+  {`Sign up!`}
 </Link>
 </Text>
   <Container sx={{"height": "30px"}}/>

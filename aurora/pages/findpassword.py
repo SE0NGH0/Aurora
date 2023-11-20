@@ -6,9 +6,10 @@ from aurora.state.auth import AuthState
 def findpassword():
     """The findpassword page."""
     return rx.container(
-        rx.container(height='200px'),
+        rx.container(height='150px'),
         rx.vstack(
              rx.heading(
+                rx.container(height='30px'),
                 rx.text(
                     "Aurora",
                     style={
@@ -28,7 +29,15 @@ def findpassword():
                 color="gray.500",
                 font_weight="medium",
             ),
-            rx.container(height='30px'),
+            rx.container(
+                rx.image(
+                    src = "/Mosaic.ico",
+                    width="100px",
+                    height="100px",
+                ),
+                center_content=True,
+            ),
+            rx.container(height='10px'),
             rx.container(
                 rx.input(placeholder="Username", on_blur=AuthState.set_username, mb=4),
                 rx.button(
@@ -45,19 +54,19 @@ def findpassword():
                 max_width="400px",
                 border_radius="lg",
             ),
-            rx.container(height='20px'),
+            rx.container(height='10px'),
             rx.text(
                 "Already have an account? ",
                 rx.link("Sign in here.", href="/", color="blue.500"),
                 color="gray.600",
             ),
-            rx.container(height='30px'),
+            rx.container(height='20px'),
             width='500px',
             height='auto',
             center_content=True,
             borderRadius='20px',
             boxShadow='9px 9px 100px #79d0ed',
-            bg = "rgb(255 255 255)"
+            background="linear-gradient(to bottom, #d7eefc, #ffffff)"
         ),
         center_content=True,
         # justifyContent='center',
@@ -65,6 +74,7 @@ def findpassword():
         maxHeight='auto',
         height='100vh',
         style={
-            'background': 'linear-gradient(to bottom, #4e8be6, #e04a3f)',
+            'background-image':"url('/aurora.jpg')",
+            'background-size':'cover',
         }
     )

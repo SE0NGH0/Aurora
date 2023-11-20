@@ -14,6 +14,8 @@ class AuthState(State):
     def signup(self):
         """Sign up a user."""
         with rx.session() as session:
+            if len(self.password)<4:
+                return rx.window_alert("비밀번호는 최소 4자리 이상이어야 합니다.")
             if self.password != self.confirm_password:
                 return rx.window_alert("비밀번호가 일치하지 않습니다.")
             if session.exec(User.select.where(User.username == self.username)).first():
@@ -41,7 +43,7 @@ class AuthState(State):
         with rx.session() as session:
             user_instance = session.exec(User.select.where(User.username == self.username)).first()
             if user_instance:
-                return rx.window_alert(f'your password: {user_instance.password}')
+                return rx.window_alert(f'your password : {user_instance.password}')
             session.expire_on_commit = False
             return rx.redirect("/")
     
