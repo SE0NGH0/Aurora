@@ -49,4 +49,5 @@ class AuthState(State):
     
     def myprofile(self):
         """myprofile page"""
-        return rx.redirect("/")
+        with rx.session() as session:
+            return rx.redirect("/")
