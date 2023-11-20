@@ -18,7 +18,7 @@ def login():
                         "fontWeight": "bolder",
                         "letterSpacing": "5px",
                         "fontFamily": "Open Sans,Sans-serif",
-                        "background": "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)",
+                        "background": "-webkit-linear-gradient(-45deg, #33a34d, #c6eb7c)",
                         "-webkit-background-clip": "text",
                         "color": "transparent",
                     },
@@ -36,7 +36,7 @@ def login():
             ),
             rx.container(
                 rx.image(
-                    src = "/Mosaic.ico",
+                    src = "/aurora.ico",
                     width="100px",
                     height="100px",
                 ),
@@ -94,7 +94,7 @@ def login():
         maxHeight='auto',
         height='100vh',
         style={
-            'background-image':"url('/aurora.jpg')",
+            'background-image':"url('/aurora2.jpg')",
             'background-size':'cover',
         }
     )
