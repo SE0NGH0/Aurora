@@ -2,6 +2,7 @@
 import reflex as rx
 from aurora.state.base import State
 from aurora.state.home import HomeState
+from aurora.state.auth import AuthState
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
@@ -31,7 +32,7 @@ def tab_button2(name, href):
         align_items="center",
         py=3,
         px=5,
-        href="/myprofile",  # 버튼 클릭 시 이동할 경로
+        on_click=AuthState.myprofile,  # 버튼 클릭 시 이동할 경로
         border="1px solid #eaeaea",
         font_weight="semibold",
         border_radius="full",
