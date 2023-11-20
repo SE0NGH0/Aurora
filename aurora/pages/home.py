@@ -23,21 +23,6 @@ def tab_button1(name, href):
         border_radius="full",
     )
 
-def tab_button2(name, href):
-    """A tab switcher button."""
-    return rx.link(
-        rx.icon(tag="at_sign", mr=2),  # 별 모양 아이콘
-        name,  # 버튼 텍스트
-        display="inline-flex",
-        align_items="center",
-        py=3,
-        px=5,
-        on_click=AuthState.myprofile,  # 버튼 클릭 시 이동할 경로
-        border="1px solid #eaeaea",
-        font_weight="semibold",
-        border_radius="full",
-    )
-
 # 왼쪽에 표시되는 탭 스위처
 def tabs():
     """The tab switcher displayed on the left."""
@@ -61,8 +46,7 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("My Profile", "/"), # My Profile 탭 버튼
-            
+            rx.button("My Profile", on_click=AuthState.myprofile), 
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
