@@ -24,6 +24,8 @@ class HomeState(State):
                 content=self.tweet,
                 created_at=datetime.now().strftime("%m/%d %H"),
             )
+            if len(self.tweet)==0:
+                return rx.window_alert('Please write at least one character!')
             session.add(tweet)
             session.commit()
             self.tweet=""
