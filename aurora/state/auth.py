@@ -46,8 +46,3 @@ class AuthState(State):
                 return rx.window_alert(f'your password : {user_instance.password}')
             session.expire_on_commit = False
             return rx.redirect("/")
-    
-    def myprofile(self):
-        """myprofile page"""
-        with rx.session() as session:
-            return rx.redirect("/")
