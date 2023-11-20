@@ -22,21 +22,6 @@ def tab_button1(name, href):
         border_radius="full",
     )
 
-def tab_button2(name, href):
-    """A tab switcher button."""
-    return rx.link(
-        rx.icon(tag="at_sign", mr=2),  # 별 모양 아이콘
-        name,  # 버튼 텍스트
-        display="inline-flex",
-        align_items="center",
-        py=3,
-        px=5,
-        href="/myprofile",  # 버튼 클릭 시 이동할 경로
-        border="1px solid #eaeaea",
-        font_weight="semibold",
-        border_radius="full",
-    )
-
 # 왼쪽에 표시되는 탭 스위처
 def tabs():
     """The tab switcher displayed on the left."""
@@ -60,13 +45,11 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("My Profile", "/"), # My Profile 탭 버튼
-            
+            rx.button("Log out", on_click=State.logout),  # 로그아웃 버튼
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
             ),
-            rx.button("Log out", on_click=State.logout),  # 로그아웃 버튼
             rx.container(height='200px'),
             align_items="left",
             gap=4,
@@ -101,22 +84,22 @@ def sidebar(HomeState):
             ),
         ),
         rx.box(
-                rx.heading("Followers", size="sm"),
-                rx.foreach(
-                    HomeState.followers,
-                    lambda follow: rx.vstack(
-                        rx.hstack(
-                            rx.avatar(name=follow.follower_username, size="sm"),  # 팔로워의 아바타 이미지
-                            rx.text(follow.follower_username),  # 팔로워의 사용자 이름
-                        width="100%",
-                        ),
-                        padding="1em",
+            rx.heading("Followers", size="sm"),
+            rx.foreach(
+                HomeState.followers,
+                lambda follow: rx.vstack(
+                    rx.hstack(
+                        rx.avatar(name=follow.follower_username, size="sm"),  # 팔로워의 아바타 이미지
+                        rx.text(follow.follower_username),  # 팔로워의 사용자 이름
+                    width="100%",
                     ),
+                    padding="1em",
                 ),
-                p=4,
-                border_radius="md",
-                border="1px solid #eaeaea",
             ),
+            p=4,
+            border_radius="md",
+            border="1px solid #eaeaea",
+        ),
         rx.box(
             rx.heading("Following", size="sm"),
             rx.foreach(
@@ -138,11 +121,11 @@ def sidebar(HomeState):
             border_radius="md",
             border="1px solid #eaeaea",
             w="100%",
+            align_items="start",
+            gap=4,
+            h="100%",
+            py=4,
         ),
-        align_items="start",
-        gap=4,
-        h="100%",
-        py=4,
     )
 
 # 피드의 헤더
@@ -165,43 +148,15 @@ def composer(HomeState):
             p=4,
         ),
         rx.box(
-            rx.text_area(
-                value = HomeState.tweet,
-                w="100%",
-                border=0,
-                placeholder="What's happening?",  # 트윗을 작성하는 입력 상자
-                resize="none",
-                py=4,
-                px=0,
-                _focus={"border": 0, "outline": 0, "boxShadow": "none"},
-                on_change=HomeState.set_tweet,
-            ),
-            rx.hstack(
-                rx.button(
-                    "Upload",
-                    on_click=HomeState.post_tweet,
-                    bg="rgb(0,128,0)",
-                    color="white",
-                    border_radius="full",
-                ),  # 트윗을 게시하는 버튼
-                justify_content="flex-end",
-                border_top="1px solid #ededed",
-                px=4,
-                py=2,
-            ),
+            rx.text(tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
         ),
         
-        grid_template_columns="1fr 5fr",
-        border_bottom="1px solid #ededed",
     )
 
 # 개별 트윗을 표시하는 함수
 def tweet(tweet):
     """Display for an individual tweet in the feed."""
     return rx.grid(
-        rx.vstack(
-            rx.avatar(name=tweet.author, size="sm"),  # 트윗 작성자의 아바타 이미지
-        ),
         rx.box(
             rx.text("@" + tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
             rx.text(tweet.content, width="100%"),  # 트윗 내용

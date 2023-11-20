@@ -47,3 +47,6 @@ class AuthState(State):
             session.expire_on_commit = False
             return rx.redirect("/")
     
+    def myprofile(self):
+        """myprofile page"""
+        return rx.redirect("/")

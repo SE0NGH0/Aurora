@@ -18,7 +18,7 @@ def login():
                         "fontWeight": "bolder",
                         "letterSpacing": "5px",
                         "fontFamily": "Open Sans,Sans-serif",
-                        "background": "-webkit-linear-gradient(-45deg, #33a34d, #c6eb7c)",
+                        "background": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                         "-webkit-background-clip": "text",
                         "color": "transparent",
                     },

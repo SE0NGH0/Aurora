@@ -5,7 +5,6 @@ import reflex as rx
 
 from .base import Follows, State, Tweet, User
 
-
 class HomeState(State):
     """The state for the home page."""
 
