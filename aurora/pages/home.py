@@ -145,6 +145,7 @@ def composer(HomeState):
         ),
         rx.box(
             rx.text_area(
+                value = HomeState.tweet,
                 w="100%",
                 border=0,
                 placeholder="What's happening?",  # 트윗을 작성하는 입력 상자
@@ -152,7 +153,7 @@ def composer(HomeState):
                 py=4,
                 px=0,
                 _focus={"border": 0, "outline": 0, "boxShadow": "none"},
-                on_blur=HomeState.set_tweet,
+                on_change=HomeState.set_tweet,
             ),
             rx.hstack(
                 rx.button(
@@ -168,6 +169,7 @@ def composer(HomeState):
                 py=2,
             ),
         ),
+        
         grid_template_columns="1fr 5fr",
         border_bottom="1px solid #ededed",
     )

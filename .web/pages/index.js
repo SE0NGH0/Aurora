@@ -7,6 +7,7 @@ import { Avatar, Box, Button, Container, Grid, Heading, HStack, Input, Link, Mod
 import { getEventURL } from "/utils/state.js"
 import { AddIcon, MinusIcon, MoonIcon, RepeatIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
+import { DebounceInput } from "react-debounce-input"
 import NextHead from "next/head"
 
 
@@ -84,12 +85,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((bikdfpap, zfvkowgg) => (
-  <VStack key={zfvkowgg} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((llztszjf, kibrbloj) => (
+  <VStack key={kibrbloj} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={bikdfpap.follower_username} size={`sm`}/>
+  <Avatar name={llztszjf.follower_username} size={`sm`}/>
   <Text>
-  {bikdfpap.follower_username}
+  {llztszjf.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -113,7 +114,7 @@ export default function Component() {
   <Avatar size={`md`}/>
 </VStack>
   <Box>
-  <Textarea onBlur={(_e0) => addEvents([Event("state.home_state.set_tweet", {value:_e0.target.value})], (_e0), {})} placeholder={`What's happening?`} sx={{"w": "100%", "border": 0, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}}/>
+  <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_tweet", {value:_e0.target.value})], (_e0), {})} placeholder={`What's happening?`} sx={{"w": "100%", "border": 0, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}} value={state.home_state.tweet}/>
   <HStack justifyContent={`flex-end`} sx={{"borderTop": "1px solid #ededed", "px": 4, "py": 2}}>
   <Button onClick={(_e) => addEvents([Event("state.home_state.post_tweet", {})], (_e), {})} sx={{"bg": "rgb(29 161 242)", "color": "white", "borderRadius": "full"}}>
   {`Tweet`}
@@ -124,17 +125,17 @@ export default function Component() {
   <Fragment>
   {isTrue(state.home_state.tweets) ? (
   <Fragment>
-  {state.home_state.tweets.map((zleejpln, lxmewdqv) => (
-  <Grid key={lxmewdqv} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
+  {state.home_state.tweets.map((htxwuckr, brhevxio) => (
+  <Grid key={brhevxio} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
   <VStack>
-  <Avatar name={zleejpln.author} size={`sm`}/>
+  <Avatar name={htxwuckr.author} size={`sm`}/>
 </VStack>
   <Box>
   <Text sx={{"fontWeight": "bold"}}>
-  {("@" + zleejpln.author)}
+  {("@" + htxwuckr.author)}
 </Text>
   <Text sx={{"width": "100%"}}>
-  {zleejpln.content}
+  {htxwuckr.content}
 </Text>
 </Box>
 </Grid>
@@ -156,15 +157,15 @@ export default function Component() {
 </Box>
   <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((hxpinxvj, xxzucvph) => (
-  <VStack key={xxzucvph} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((fwvwfkti, wcbstrnc) => (
+  <VStack key={wcbstrnc} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={hxpinxvj.username} size={`sm`}/>
+  <Avatar name={fwvwfkti.username} size={`sm`}/>
   <Text>
-  {hxpinxvj.username}
+  {fwvwfkti.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:hxpinxvj.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:fwvwfkti.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -174,15 +175,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((nosjzomz, nqurhuta) => (
-  <VStack key={nqurhuta} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((xgdciaxb, ovxnvhlx) => (
+  <VStack key={ovxnvhlx} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={nosjzomz.followed_username} size={`sm`}/>
+  <Avatar name={xgdciaxb.followed_username} size={`sm`}/>
   <Text>
-  {nosjzomz.followed_username}
+  {xgdciaxb.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:nosjzomz.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:xgdciaxb.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>
