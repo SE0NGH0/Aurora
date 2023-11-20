@@ -3,12 +3,13 @@ import reflex as rx
 from aurora.state.base import State
 from aurora.state.home import HomeState
 from aurora.state.auth import AuthState
+
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
 
 # 탭 버튼을 생성하는 함수
-def tab_button1(name, href):
+def tab_button(name, href):
     """A tab switcher button."""
     return rx.link(
         rx.icon(tag="star", mr=2),  # 별 모양 아이콘
@@ -45,7 +46,7 @@ def tabs():
                     ),  # 앱 이름
                 ),
             ),
-            tab_button1("Home", "/"),  # Home 탭 버튼
+            tab_button("Home", "/"),  # Home 탭 버튼
             rx.button("My Profile", on_click=AuthState.myprofile), 
             rx.button(
                 rx.icon(tag="moon"),
