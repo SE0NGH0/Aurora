@@ -6,29 +6,45 @@ from aurora.state.auth import AuthState
 def signup():
     """The sign up page."""
     return rx.container(
-        rx.container(height='150px'),
+        rx.container(height='200px'),
         rx.vstack(
-            rx.container(height='30px'),
-            rx.text(
-                "Aurora",
-                style={
-                    "fontSize": "40px",
-                    "fontWeight": "bolder",
-                    "letterSpacing": "5px",
-                    "fontFamily": "Open Sans,Sans-serif",
-                    "background": "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)",
-                    "-webkit-background-clip": "text",
-                    "color": "transparent",
-                },
-                center_content=True,
-            ),
-            rx.container(
-                rx.image(
-                    src = "/Mosaic.ico",
-                    width="100px",
-                    height="100px",
+            rx.hstack(
+                rx.vstack(
+                    rx.container(height='20px'),
+                    rx.image(
+                        src = "/aurora.ico",
+                        width="70px",
+                        height="70px",
+                    ),
+                ),              
+                rx.vstack(           
+                    rx.container(height='8px'),
+                    rx.container(
+                        rx.text(
+                            "AURORA",
+                            style={
+                                "fontSize": "40px",
+                                "fontWeight": "bolder",
+                                "letterSpacing": "3px",
+                                "fontFamily": "Open Sans, Sans-serif",
+                                "background": "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)",
+                                "-webkit-background-clip": "text",
+                                "color": "black",
+                            },
+                            mb=-3,
+                        ),
+                        rx.text(
+                            "Record your shining moments!",
+                            style={
+                                'background': "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)",
+                                'background_clip': "text",  # 텍스트에만 그라데이션 적용
+                                'color': "transparent",  # 텍스트 색상을 투명으로 설정
+                                'font_weight': "medium",
+                            },
+                        ),
+                    ),
+
                 ),
-                center_content=True,
             ),
             rx.container(height='10px'),
             rx.container(
@@ -48,7 +64,7 @@ def signup():
                 rx.button(
                     "Sign up",
                     on_click=AuthState.signup,
-                    bg="blue.500",
+                    bg="#212963",
                     color="white",
                     _hover={"bg": "blue.600"},
                 ),
@@ -66,7 +82,7 @@ def signup():
                 color="gray.600",
             ),
             rx.container(height='20px'),
-            width='500px',
+            width='400px',
             height='auto',
             center_content=True,
             borderRadius='20px',
