@@ -31,7 +31,7 @@ def tab_button2(name, href):
         align_items="center",
         py=3,
         px=5,
-        href="/myprofile",  # 버튼 클릭 시 이동할 경로
+        href=href,  # 버튼 클릭 시 이동할 경로
         border="1px solid #eaeaea",
         font_weight="semibold",
         border_radius="full",
@@ -59,7 +59,7 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("My Profile", "/"),
+            tab_button2("My Profile", "/myprofile"),
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
