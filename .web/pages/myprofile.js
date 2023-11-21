@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Avatar, Box, Button, Container, Drawer, DrawerContent, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Spacer, Text, VStack } from "@chakra-ui/react"
+import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Spacer, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
 import { AddIcon, ArrowLeftIcon, MinusIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
@@ -65,7 +65,7 @@ export default function Component() {
 )}
 </Fragment>
   <Container sx={{"maxWidth": "1300px"}}>
-  <Grid sx={{"gridTemplateColumns": "1fr 3fr 1fr", "h": "100vh", "gap": 4}}>
+  <Grid sx={{"gridTemplateColumns": "1fr 3.5fr 0.5fr", "h": "100vh", "gap": 4}}>
   <Box sx={{"py": 4}}>
   <VStack alignItems={`left`} sx={{"gap": 4}}>
   <Container>
@@ -105,66 +105,81 @@ export default function Component() {
 </HStack>
 </Grid>
 </Box>
+  <Box>
   <VStack>
+  <Container sx={{"height": "8px"}}/>
   <Container>
   <Button>
   <ArrowLeftIcon onClick={(_e) => addEvents([Event("state.home_state.right", {})], (_e), {})}/>
 </Button>
 </Container>
-  <Drawer>
-  <DrawerContent sx={{"alignItems": "start", "gap": 4, "h": "100%", "py": 4}}>
+  <Drawer isOpen={state.home_state.show_right}>
+  <DrawerOverlay>
+  <DrawerContent sx={{"bg": "rgba(100, 100, 100, 0.7)"}}>
+  <DrawerHeader>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((zhzlktvd, nspfcfju) => (
-  <VStack key={nspfcfju} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((oyijuptq, xpawibhn) => (
+  <VStack key={xpawibhn} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={zhzlktvd.username} size={`sm`}/>
+  <Avatar name={oyijuptq.username} size={`sm`}/>
   <Text>
-  {zhzlktvd.username}
+  {oyijuptq.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:zhzlktvd.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:oyijuptq.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
 </VStack>
 ))}
+</DrawerHeader>
+  <DrawerBody sx={{"alignItems": "start", "gap": 4, "h": "100%", "py": 4}}>
   <Box sx={{"p": 4, "borderRadius": "md", "border": "1px solid #eaeaea"}}>
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((zoxpcufl, hsmryslv) => (
-  <VStack key={hsmryslv} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((vebexhso, ashseydh) => (
+  <VStack key={ashseydh} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={zoxpcufl.follower_username} size={`sm`}/>
+  <Avatar name={vebexhso.follower_username} size={`sm`}/>
   <Text>
-  {zoxpcufl.follower_username}
+  {vebexhso.follower_username}
 </Text>
 </HStack>
 </VStack>
 ))}
 </Box>
+  <Container sx={{"height": "8px"}}/>
   <Box sx={{"p": 4, "borderRadius": "md", "border": "1px solid #eaeaea", "w": "100%"}}>
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((eepmrwkl, wivnjbtv) => (
-  <VStack key={wivnjbtv} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((dozjmbft, zkovoaks) => (
+  <VStack key={zkovoaks} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={eepmrwkl.followed_username} size={`sm`}/>
+  <Avatar name={dozjmbft.followed_username} size={`sm`}/>
   <Text>
-  {eepmrwkl.followed_username}
+  {dozjmbft.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:eepmrwkl.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:dozjmbft.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>
 </VStack>
 ))}
 </Box>
+</DrawerBody>
+  <DrawerFooter>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.right", {})], (_e), {})}>
+  {`Close`}
+</Button>
+</DrawerFooter>
 </DrawerContent>
+</DrawerOverlay>
 </Drawer>
 </VStack>
+</Box>
 </Grid>
 </Container>
   <NextHead>
