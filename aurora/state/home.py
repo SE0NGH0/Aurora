@@ -116,3 +116,9 @@ class HomeState(State):
                 )
                 return users
         return []
+    
+    show_right: bool = False
+    show_top: bool = False
+
+    def right(self):
+        self.show_right = not (self.show_right)
