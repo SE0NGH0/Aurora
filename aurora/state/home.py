@@ -14,6 +14,9 @@ class HomeState(State):
     friend: str
     search: str
 
+    show_right: bool = False
+    show_top: bool = False
+
     def post_tweet(self):
         """Post a tweet."""
         if not self.logged_in:
@@ -116,3 +119,9 @@ class HomeState(State):
                 )
                 return users
         return []
+    
+    def top(self):
+        self.show_top = not (self.show_top)
+
+    def right(self):
+        self.show_right = not (self.show_right)

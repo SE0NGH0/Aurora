@@ -3,9 +3,9 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Avatar, Box, Button, Container, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Spacer, Text, VStack } from "@chakra-ui/react"
+import { Avatar, Box, Button, Container, Drawer, DrawerContent, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Spacer, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
-import { AddIcon, MinusIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
+import { AddIcon, ArrowLeftIcon, MinusIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
 import NextHead from "next/head"
 
@@ -105,17 +105,24 @@ export default function Component() {
 </HStack>
 </Grid>
 </Box>
-  <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
+  <VStack>
+  <Container>
+  <Button>
+  <ArrowLeftIcon onClick={(_e) => addEvents([Event("state.home_state.right", {})], (_e), {})}/>
+</Button>
+</Container>
+  <Drawer>
+  <DrawerContent sx={{"alignItems": "start", "gap": 4, "h": "100%", "py": 4}}>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((zuzilgos, habebmom) => (
-  <VStack key={habebmom} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((zhzlktvd, nspfcfju) => (
+  <VStack key={nspfcfju} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={zuzilgos.username} size={`sm`}/>
+  <Avatar name={zhzlktvd.username} size={`sm`}/>
   <Text>
-  {zuzilgos.username}
+  {zhzlktvd.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:zuzilgos.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:zhzlktvd.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -125,12 +132,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((mcfjoory, seuczqhp) => (
-  <VStack key={seuczqhp} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((zoxpcufl, hsmryslv) => (
+  <VStack key={hsmryslv} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={mcfjoory.follower_username} size={`sm`}/>
+  <Avatar name={zoxpcufl.follower_username} size={`sm`}/>
   <Text>
-  {mcfjoory.follower_username}
+  {zoxpcufl.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -140,21 +147,23 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((gdobmafp, gkafpftu) => (
-  <VStack key={gkafpftu} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((eepmrwkl, wivnjbtv) => (
+  <VStack key={wivnjbtv} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={gdobmafp.followed_username} size={`sm`}/>
+  <Avatar name={eepmrwkl.followed_username} size={`sm`}/>
   <Text>
-  {gdobmafp.followed_username}
+  {eepmrwkl.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:gdobmafp.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:eepmrwkl.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>
 </VStack>
 ))}
 </Box>
+</DrawerContent>
+</Drawer>
 </VStack>
 </Grid>
 </Container>

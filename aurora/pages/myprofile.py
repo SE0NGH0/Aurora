@@ -64,71 +64,83 @@ def tabs():
 def sidebar(HomeState):
     """The sidebar displayed on the right."""
     return rx.vstack(
-        rx.input(
-            on_change=HomeState.set_friend,
-            placeholder="Search users",  # 사용자 검색을 위한 입력 상자
-            width="100%",
+        rx.container(
+            rx.button(
+                rx.icon(
+                    tag="arrow_left", 
+                    on_click=HomeState.right
+                ),
+            ),
         ),
-        rx.foreach(
-            HomeState.search_users,
-            lambda user: rx.vstack(
-                rx.hstack(
-                    rx.avatar(name=user.username, size="sm"),  # 검색된 사용자의 아바타 이미지
-                    rx.text(user.username),  # 검색된 사용자의 사용자 이름
-                    rx.spacer(),
-                    rx.button(
-                        rx.icon(tag="add"),
-                        on_click=lambda: HomeState.follow_user(user.username),  # 사용자를 팔로우하는 버튼
-                    ),
+        rx.drawer(
+            rx.drawer_content(
+                rx.input(
+                    on_change=HomeState.set_friend,
+                    placeholder="Search users",  # 사용자 검색을 위한 입력 상자
                     width="100%",
                 ),
-                py=2,
-                width="100%",
-            ),
-        ),
-        rx.box(
-                rx.heading("Followers", size="sm"),
                 rx.foreach(
-                    HomeState.followers,
-                    lambda follow: rx.vstack(
+                    HomeState.search_users,
+                    lambda user: rx.vstack(
                         rx.hstack(
-                            rx.avatar(name=follow.follower_username, size="sm"),  # 팔로워의 아바타 이미지
-                            rx.text(follow.follower_username),  # 팔로워의 사용자 이름
+                            rx.avatar(name=user.username, size="sm"),  # 검색된 사용자의 아바타 이미지
+                            rx.text(user.username),  # 검색된 사용자의 사용자 이름
+                            rx.spacer(),
+                            rx.button(
+                                rx.icon(tag="add"),
+                                on_click=lambda: HomeState.follow_user(user.username),  # 사용자를 팔로우하는 버튼
+                            ),
+                            width="100%",
+                        ),
+                        py=2,
                         width="100%",
-                        ),
-                        padding="1em",
                     ),
                 ),
-                p=4,
-                border_radius="md",
-                border="1px solid #eaeaea",
-            ),
-        rx.box(
-            rx.heading("Following", size="sm"),
-            rx.foreach(
-                HomeState.following,
-                lambda follow: rx.vstack(
-                    rx.hstack(
-                        rx.avatar(name=follow.followed_username, size="sm"),  # 팔로잉 중인 사용자의 아바타 이미지
-                        rx.text(follow.followed_username),  # 팔로잉 중인 사용자의 사용자 이름
-                        rx.spacer(),
-                        rx.button(
-                            rx.icon(tag="minus"),
-                            on_click=lambda: HomeState.unfollow_user(follow.followed_username),
+                rx.box(
+                    rx.heading("Followers", size="sm"),
+                    rx.foreach(
+                        HomeState.followers,
+                        lambda follow: rx.vstack(
+                            rx.hstack(
+                                rx.avatar(name=follow.follower_username, size="sm"),  # 팔로워의 아바타 이미지
+                                rx.text(follow.follower_username),  # 팔로워의 사용자 이름
+                            width="100%",
+                            ),
+                            padding="1em",
                         ),
                     ),
-                    padding="1em",
+                    p=4,
+                    border_radius="md",
+                    border="1px solid #eaeaea",
                 ),
+                rx.box(
+                    rx.heading("Following", size="sm"),
+                    rx.foreach(
+                        HomeState.following,
+                        lambda follow: rx.vstack(
+                            rx.hstack(
+                                rx.avatar(name=follow.followed_username, size="sm"),  # 팔로잉 중인 사용자의 아바타 이미지
+                                rx.text(follow.followed_username),  # 팔로잉 중인 사용자의 사용자 이름
+                                rx.spacer(),
+                                rx.button(
+                                    rx.icon(tag="minus"),
+                                    on_click=lambda: HomeState.unfollow_user(follow.followed_username),
+                                ),
+                            ),
+                            padding="1em",
+                        ),
+                    ),
+                    p=4,
+                    border_radius="md",
+                    border="1px solid #eaeaea",
+                    w="100%",
+                ),
+                align_items="start",
+                gap=4,
+                h="100%",
+                py=4,
             ),
-            p=4,
-            border_radius="md",
-            border="1px solid #eaeaea",
-            w="100%",
-        ),
-        align_items="start",
-        gap=4,
-        h="100%",
-        py=4,
+        ),  
     )
 
 # 피드의 헤더
