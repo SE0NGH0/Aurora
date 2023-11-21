@@ -5,7 +5,6 @@ from aurora.state.home import HomeState
 from aurora.state.auth import AuthState
 from aurora.state.base import User
 
-
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
@@ -182,7 +181,7 @@ def feed(HomeState):
         
     )
 
-# 홈 페이지
+# 마이 페이지
 def myprofile():
     """The home page."""
     return container(

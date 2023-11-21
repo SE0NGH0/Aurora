@@ -116,5 +116,3 @@ class HomeState(State):
                 )
                 return users
         return []
-    
-   
