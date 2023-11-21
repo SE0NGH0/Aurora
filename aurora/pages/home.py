@@ -151,7 +151,7 @@ def feed_header(HomeState):
         rx.input(on_change=HomeState.set_search, placeholder="Search"),  # 트윗 검색을 위한 입력 상자
         justify="space-between",
         p=4,
-        border_bottom="1px solid #ededed",
+        border_bottom="3px solid #ededed",
     )
 
 # 새로운 트윗을 작성하는 컴포저
@@ -190,7 +190,7 @@ def composer(HomeState):
         ),
         
         grid_template_columns="1fr 5fr",
-        border_bottom="1px solid #ededed",
+        border_bottom="3px solid #ededed",
     )
 
 # 개별 트윗을 표시하는 함수
@@ -234,7 +234,7 @@ def feed(HomeState):
                 p=4,
             ),
         ),
-        border_x="1px solid #ededed",
+        border_x="3px solid #ededed",
         h="100%",
     )
 
