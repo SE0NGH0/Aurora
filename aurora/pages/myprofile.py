@@ -62,11 +62,11 @@ def tabs():
     )
 
 # 오른쪽에 표시되는 사이드바
-def sidebar(HomeState):
+def sidebar(DrawerState):
     """The sidebar displayed on the right."""
     rx.box(
         rx.button(
-            rx.icon(tag="arrow_left", on_click=HomeState.right)
+            rx.icon(tag="arrow_left", on_click=DrawerState.right)
         ),
         rx.drawer(
             rx.drawer_overlay(
@@ -77,13 +77,13 @@ def sidebar(HomeState):
                     ),
                     rx.drawer_footer(
                         rx.button(
-                            "Close", on_click=HomeState.right
+                            "Close", on_click=DrawerState.right
                         )
                     ),
                     bg="rgba(0, 0, 0, 0.3)",
                 )
             ),
-            is_open=HomeState.show_right,
+            is_open=DrawerState.show_right,
         )
     )
 
