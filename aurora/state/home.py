@@ -212,11 +212,4 @@ class HomeState(State):
     def get_status_messages(self):
         """Get tweets from the database."""
         with rx.session() as session:
-            if self.search:
-                self.status_messages = (
-                    session.query(Status_message)
-                    .filter(Status_message.content.contains(self.search))
-                    .all()[::-1]
-                )
-            else:
-                self.status_messages = session.query(Status_message).all()[::-1]
+            self.status_messages = session.query(Status_message).all()[::-1]
