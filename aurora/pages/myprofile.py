@@ -174,26 +174,31 @@ def feed_header(HomeState):
 def composer(AuthState):
     """The composer for new tweets."""
     return rx.grid(
+        rx.button("Edit Profile", on_click=HomeState.change),
         rx.hstack(
             rx.avatar(size="md"),  # 사용자의 아바타 이미지
-            rx.text(AuthState.username, 
-                    size = "md", fontSize = "18px", fontWeight = "bold"
-                    ),
-            p=4,
+            rx.text(AuthState.username, size = "md", fontSize = "18px", fontWeight = "bold"),    
+            p=4,  
+        ),
+        rx.hstack(
+            rx.text(HomeState.status_message)
         ),
         rx.box(
-            rx.heading(HomeState.text)
-        ),
-        rx.box(
-            rx.button("write", on_click=HomeState.change),
             rx.modal(
                 rx.modal_overlay(
                     rx.modal_content(
-                        rx.modal_header("write"),
+                        rx.modal_header("Edit Profile"),
                         rx.modal_body(
                             rx.text_area(
-                                value=HomeState.text,
-                                on_change=HomeState.set_text,
+                                value=HomeState.status_message,
+                                w="600px",
+                                border=2,
+                                placeholder="상태 메세지",  # 트윗을 작성하는 입력 상자
+                                resize="none",
+                                py=4,
+                                px=0,
+                                _focus={"border": 0, "outline": 0, "boxShadow": "none"},
+                                on_change=HomeState.set_status_message,
                             ),
                         ),
                         rx.modal_footer(

@@ -120,11 +120,11 @@ export default function Component() {
 </Button>
 </HStack>
   <SimpleGrid columns={[2]} spacing={`5px`}>
-  {state.home_state.img.map((vapwhots, pxcanbaj) => (
-  <VStack key={pxcanbaj}>
-  <Image src={vapwhots}/>
+  {state.home_state.img.map((yfjkezma, ifjgziqq) => (
+  <VStack key={ifjgziqq}>
+  <Image src={yfjkezma}/>
   <Text>
-  {vapwhots}
+  {yfjkezma}
 </Text>
 </VStack>
 ))}
@@ -133,23 +133,23 @@ export default function Component() {
   <Fragment>
   {isTrue(state.home_state.tweets) ? (
   <Fragment>
-  {state.home_state.tweets.map((ohmjkyzo, csdyegzj) => (
-  <Grid key={csdyegzj} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
+  {state.home_state.tweets.map((pdfhqect, wkxsqvgq) => (
+  <Grid key={wkxsqvgq} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
   <VStack>
-  <Avatar name={ohmjkyzo.author} size={`sm`}/>
+  <Avatar name={pdfhqect.author} size={`sm`}/>
 </VStack>
   <Box>
   <Text sx={{"fontWeight": "bold"}}>
-  {("@" + ohmjkyzo.author)}
+  {("@" + pdfhqect.author)}
 </Text>
   <Text sx={{"width": "100%"}}>
-  {ohmjkyzo.content}
+  {pdfhqect.content}
 </Text>
   <Fragment>
-  {isTrue(ohmjkyzo.image_content) ? (
+  {isTrue(pdfhqect.image_content) ? (
   <Fragment>
-  {ohmjkyzo.image_content.split(", ").map((dwmtelac, ilhngnbr) => (
-  <Image alt={`tweet image`} key={ilhngnbr} src={`/${dwmtelac}`}/>
+  {pdfhqect.image_content.split(", ").map((nlwceiwt, zjeegtmn) => (
+  <Image alt={`tweet image`} key={zjeegtmn} src={`/${nlwceiwt}`}/>
 ))}
 </Fragment>
 ) : (
@@ -178,15 +178,15 @@ export default function Component() {
 </Box>
   <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((qsbprbqm, lkvuqjdl) => (
-  <VStack key={lkvuqjdl} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((bglcmugq, hpdtrgdo) => (
+  <VStack key={hpdtrgdo} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={qsbprbqm.username} size={`sm`}/>
+  <Avatar name={bglcmugq.username} size={`sm`}/>
   <Text>
-  {qsbprbqm.username}
+  {bglcmugq.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:qsbprbqm.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:bglcmugq.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -196,12 +196,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((edggemwx, ntejupmf) => (
-  <VStack key={ntejupmf} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((foouzcxb, vzvsgtsk) => (
+  <VStack key={vzvsgtsk} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={edggemwx.follower_username} size={`sm`}/>
+  <Avatar name={foouzcxb.follower_username} size={`sm`}/>
   <Text>
-  {edggemwx.follower_username}
+  {foouzcxb.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -211,15 +211,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((kazjynxr, cnjaqevh) => (
-  <VStack key={cnjaqevh} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((nrlgkkxp, domaelsb) => (
+  <VStack key={domaelsb} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={kazjynxr.followed_username} size={`sm`}/>
+  <Avatar name={nrlgkkxp.followed_username} size={`sm`}/>
   <Text>
-  {kazjynxr.followed_username}
+  {nrlgkkxp.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:kazjynxr.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:nrlgkkxp.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>

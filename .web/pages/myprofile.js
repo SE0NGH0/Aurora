@@ -98,29 +98,29 @@ export default function Component() {
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_search", {search:_e0.target.value})], (_e0), {})} placeholder={`Search`} type={`text`}/>
 </HStack>
   <Grid>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.change", {})], (_e), {})}>
+  {`Edit Profile`}
+</Button>
   <HStack sx={{"p": 4}}>
   <Avatar size={`md`}/>
   <Text sx={{"size": "md", "fontSize": "18px", "fontWeight": "bold"}}>
   {state.auth_state.username}
 </Text>
 </HStack>
+  <HStack>
+  <Text>
+  {state.home_state.status_message}
+</Text>
+</HStack>
   <Box>
-  <Heading>
-  {state.home_state.text}
-</Heading>
-</Box>
-  <Box>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.change", {})], (_e), {})}>
-  {`write`}
-</Button>
   <Modal isOpen={state.home_state.show}>
   <ModalOverlay>
   <ModalContent>
   <ModalHeader>
-  {`write`}
+  {`Edit Profile`}
 </ModalHeader>
   <ModalBody>
-  <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_text", {value:_e0.target.value})], (_e0), {})} value={state.home_state.text}/>
+  <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_status_message", {value:_e0.target.value})], (_e0), {})} placeholder={`상태 메세지`} sx={{"w": "600px", "border": 2, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}} value={state.home_state.status_message}/>
 </ModalBody>
   <ModalFooter>
   <Button onClick={(_e) => addEvents([Event("state.home_state.change", {})], (_e), {})}>
@@ -146,15 +146,15 @@ export default function Component() {
   <DrawerContent sx={{"bg": "rgba(100, 100, 100, 0.7)"}}>
   <DrawerHeader>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((opixxxrk, wefwbkqp) => (
-  <VStack key={wefwbkqp} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((nqxhfego, mywsvrrs) => (
+  <VStack key={mywsvrrs} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={opixxxrk.username} size={`sm`}/>
+  <Avatar name={nqxhfego.username} size={`sm`}/>
   <Text>
-  {opixxxrk.username}
+  {nqxhfego.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:opixxxrk.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:nqxhfego.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -166,12 +166,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((oakolqkq, ayycebzh) => (
-  <VStack key={ayycebzh} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((uufoeixl, zbpsdcgq) => (
+  <VStack key={zbpsdcgq} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={oakolqkq.follower_username} size={`sm`}/>
+  <Avatar name={uufoeixl.follower_username} size={`sm`}/>
   <Text>
-  {oakolqkq.follower_username}
+  {uufoeixl.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -182,15 +182,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((ghxxwqwh, juguysqx) => (
-  <VStack key={juguysqx} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((etxozyzo, sysvnuho) => (
+  <VStack key={sysvnuho} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={ghxxwqwh.followed_username} size={`sm`}/>
+  <Avatar name={etxozyzo.followed_username} size={`sm`}/>
   <Text>
-  {ghxxwqwh.followed_username}
+  {etxozyzo.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:ghxxwqwh.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:etxozyzo.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>

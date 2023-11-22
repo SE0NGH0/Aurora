@@ -3,7 +3,7 @@ from datetime import datetime
 
 import reflex as rx
 
-from .base import Follows, State, Tweet, User
+from .base import Follows, State, Tweet, User, Status_message
 
 import os
 import tkinter as tk
@@ -27,7 +27,7 @@ class HomeState(State):
     img: list[str]
     files: list[str] = []  # Add files attribute
 
-    text: str = ""
+    status_message: str
     
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
@@ -196,4 +196,18 @@ class HomeState(State):
     def change(self):
         self.show = not (self.show)
 
-    
+    def post_status_message(self):
+        with rx.session() as session:
+            status_message = Status_message(
+                content=self.status_message,
+            )
+            
+            session.add(status_message)
+            session.commit()
+            self.status_message = ""
+            
+        return self.get_status_messages()
+
+    def get_status_messages(self):
+        with rx.session() as session:
+            self.status_message = session.query(Status_message)
