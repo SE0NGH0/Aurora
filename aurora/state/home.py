@@ -93,6 +93,8 @@ class HomeState(State):
             session.add(tweet)
             session.commit()
             self.tweet = ""
+            self.img=[]
+            self.files=[]
             
         return self.get_tweets()
 

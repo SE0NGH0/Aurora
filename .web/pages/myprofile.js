@@ -146,15 +146,15 @@ export default function Component() {
   <DrawerContent sx={{"bg": "rgba(100, 100, 100, 0.7)"}}>
   <DrawerHeader>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((wpdoxhfb, hbmmcuyv) => (
-  <VStack key={hbmmcuyv} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((ezafslxd, tuhdjftn) => (
+  <VStack key={tuhdjftn} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={wpdoxhfb.username} size={`sm`}/>
+  <Avatar name={ezafslxd.username} size={`sm`}/>
   <Text>
-  {wpdoxhfb.username}
+  {ezafslxd.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:wpdoxhfb.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:ezafslxd.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -166,12 +166,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((xrwrrawa, tbarhsbt) => (
-  <VStack key={tbarhsbt} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((yvhtrdqm, ivhxrfqg) => (
+  <VStack key={ivhxrfqg} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={xrwrrawa.follower_username} size={`sm`}/>
+  <Avatar name={yvhtrdqm.follower_username} size={`sm`}/>
   <Text>
-  {xrwrrawa.follower_username}
+  {yvhtrdqm.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -182,15 +182,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((rowafozm, vtxllgtq) => (
-  <VStack key={vtxllgtq} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((ztzpuxcs, fqcurkzb) => (
+  <VStack key={fqcurkzb} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={rowafozm.followed_username} size={`sm`}/>
+  <Avatar name={ztzpuxcs.followed_username} size={`sm`}/>
   <Text>
-  {rowafozm.followed_username}
+  {ztzpuxcs.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:rowafozm.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:ztzpuxcs.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>
