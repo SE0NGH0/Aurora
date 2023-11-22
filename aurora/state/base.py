@@ -26,9 +26,8 @@ class Tweet(rx.Model, table=True):
 
     content: str = Field()
     created_at: str = Field()
-
+    image_content: str = Field()
     author: str = Field()
-
 
 class State(rx.State):
     """The base state for the app."""
@@ -49,4 +48,3 @@ class State(rx.State):
     def logged_in(self):
         """Check if a user is logged in."""
         return self.user is not None
-

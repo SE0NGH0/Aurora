@@ -6,7 +6,7 @@ from aurora.state.home import HomeState
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
-
+color = "rgb(107,99,246)"
 # 탭 버튼을 생성하는 함수
 def tab_button1(name, href):
     """A tab switcher button."""
@@ -173,15 +173,13 @@ def feed_header(HomeState):
 def composer(HomeState):
     """The composer for new tweets."""
     return rx.grid(
-        rx.vstack(
+        rx.hstack(
+            rx.container(width='10px'),
             rx.avatar(size="md"),  # 사용자의 아바타 이미지
-            p=4,
-        ),
-        rx.box(
             rx.text_area(
-                value = HomeState.tweet,
-                w="100%",
-                border=0,
+                value=HomeState.tweet,
+                w="600px",
+                border=2,
                 placeholder="What's happening?",  # 트윗을 작성하는 입력 상자
                 resize="none",
                 py=4,
@@ -189,28 +187,57 @@ def composer(HomeState):
                 _focus={"border": 0, "outline": 0, "boxShadow": "none"},
                 on_change=HomeState.set_tweet,
             ),
-            rx.hstack(
-                rx.button(
-                    "Upload",
-                    on_click=HomeState.post_tweet,
-                    bg="rgb(0,128,0)",
-                    color="white",
-                    border_radius="full",
-                ),  # 트윗을 게시하는 버튼
-                justify_content="flex-end",
-                border_top="1px solid #ededed",
-                px=4,
-                py=2,
-            ),
         ),
-        
-        grid_template_columns="1fr 5fr",
+        rx.hstack(
+            rx.button(
+                "Select File",
+                color=color,
+                bg="white",
+                border=f"1px solid {color}",
+                on_click=HomeState.handle_file_selection,
+                style={"margin": "0", "padding": "10px"}
+            ),
+            rx.button(
+                "Tweet",
+                on_click= HomeState.post_tweet,
+                border_radius="1em",
+                box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+                background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                box_sizing="border-box",
+                color="white",
+                opacity="0.6",
+                _hover={"opacity": 1},
+                style={"margin-left": "auto"},  # Align to the right
+            ),  # 트윗을 게시하는 버튼
+            justify_content="flex-end",
+            border_top="1px solid #ededed",
+            px=4,
+            py=2,
+        ),
+        rx.responsive_grid(
+            rx.foreach(
+                HomeState.img,
+                lambda img: rx.vstack(
+                    rx.image(src=img),
+                    rx.text(img),
+                ),
+            ),
+            columns=[2],
+            spacing="5px",
+        ),
+        grid_template_rows="0.5fr 0.3fr 0.5fr",
         border_bottom="3px solid #ededed",
     )
+
 
 # 개별 트윗을 표시하는 함수
 def tweet(tweet):
     """Display for an individual tweet in the feed."""
+    image_tags = rx.foreach(
+        tweet.image_content.split(", "),
+        lambda image: rx.image(src=f"C:/Users/chank/OneDrive/바탕 화면/Auroraproject/Aurora/.web/public/{image}", alt="tweet image")
+    ),
+    
     return rx.grid(
         rx.vstack(
             rx.avatar(name=tweet.author, size="sm"),  # 트윗 작성자의 아바타 이미지
@@ -218,6 +245,7 @@ def tweet(tweet):
         rx.box(
             rx.text("@" + tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
             rx.text(tweet.content, width="100%"),  # 트윗 내용
+            *image_tags
         ),
         grid_template_columns="1fr 5fr",
         py=4,
@@ -235,7 +263,7 @@ def feed(HomeState):
             HomeState.tweets,
             rx.foreach(
                 HomeState.tweets,
-                tweet,
+                tweet
             ),
             rx.vstack(
                 rx.button(
@@ -252,6 +280,7 @@ def feed(HomeState):
         border_x="3px solid #ededed",
         h="100%",
     )
+
 
 # 홈 페이지
 def home():

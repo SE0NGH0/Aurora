@@ -3,10 +3,11 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Spacer, Text, VStack } from "@chakra-ui/react"
+import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Text, Textarea, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
 import { AddIcon, ArrowLeftIcon, MinusIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
+import { DebounceInput } from "react-debounce-input"
 import NextHead from "next/head"
 
 
@@ -103,6 +104,33 @@ export default function Component() {
   {state.auth_state.username}
 </Text>
 </HStack>
+  <Box>
+  <Button>
+  {`write`}
+</Button>
+  <Modal isOpen={state.home_state.show}>
+  <ModalOverlay>
+  <ModalContent>
+  <ModalHeader onClick={(_e) => addEvents([Event("state.home_state.change", {})], (_e), {})}>
+  {`write`}
+</ModalHeader>
+  <ModalBody>
+  <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_tweet", {value:_e0.target.value})], (_e0), {})} placeholder={`What's happening?`} sx={{"w": "100%", "border": 0, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}} value={state.home_state.tweet}/>
+  <HStack justifyContent={`flex-end`} sx={{"borderTop": "1px solid #ededed", "px": 4, "py": 2}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.post_tweet", {})], (_e), {})} sx={{"bg": "rgb(0,128,0)", "color": "white", "borderRadius": "full"}}>
+  {`Upload`}
+</Button>
+</HStack>
+</ModalBody>
+  <ModalFooter>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.change", {})], (_e), {})}>
+  {`Close`}
+</Button>
+</ModalFooter>
+</ModalContent>
+</ModalOverlay>
+</Modal>
+</Box>
 </Grid>
 </Box>
   <Box>
@@ -118,15 +146,15 @@ export default function Component() {
   <DrawerContent sx={{"bg": "rgba(100, 100, 100, 0.7)"}}>
   <DrawerHeader>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((tjarrojd, xnmgbvns) => (
-  <VStack key={xnmgbvns} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((jmmyibxp, owuzqoqw) => (
+  <VStack key={owuzqoqw} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={tjarrojd.username} size={`sm`}/>
+  <Avatar name={jmmyibxp.username} size={`sm`}/>
   <Text>
-  {tjarrojd.username}
+  {jmmyibxp.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:tjarrojd.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:jmmyibxp.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -138,12 +166,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((dohfqaiw, pdfvxvba) => (
-  <VStack key={pdfvxvba} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((gzivgpoi, hnvsahho) => (
+  <VStack key={hnvsahho} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={dohfqaiw.follower_username} size={`sm`}/>
+  <Avatar name={gzivgpoi.follower_username} size={`sm`}/>
   <Text>
-  {dohfqaiw.follower_username}
+  {gzivgpoi.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -154,15 +182,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((ttlvygya, odyrhjac) => (
-  <VStack key={odyrhjac} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((iffgjwup, dvuvnxvg) => (
+  <VStack key={dvuvnxvg} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={ttlvygya.followed_username} size={`sm`}/>
+  <Avatar name={iffgjwup.followed_username} size={`sm`}/>
   <Text>
-  {ttlvygya.followed_username}
+  {iffgjwup.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:ttlvygya.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:iffgjwup.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>

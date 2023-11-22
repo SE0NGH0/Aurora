@@ -5,6 +5,11 @@ import reflex as rx
 
 from .base import Follows, State, Tweet, User
 
+import os
+import tkinter as tk
+from tkinter import filedialog
+
+
 class HomeState(State):
     """The state for the home page."""
 
@@ -14,25 +19,84 @@ class HomeState(State):
     friend: str
     search: str
 
+    img: list[str]
+    files: list[str] = []  # Add files attribute
+
+
     show_right: bool = False
     show_top: bool = False
 
-    def post_tweet(self):
+    show: bool = False
+
+    def handle_file_selection(self):
+        # 파일 선택 대화상자 열기
+        root = tk.Tk()
+        root.withdraw()  # 화면에 창을 보이지 않도록 함
+        file_paths = filedialog.askopenfilenames()
+
+        # 선택된 파일 경로에 대한 처리
+        for file_path in file_paths:
+            # 파일 이름과 확장자를 추출
+            file_name = os.path.basename(file_path)
+            file_extension = os.path.splitext(file_name)[1]
+            
+            # 선택한 파일을 저장
+            upload_data = open(file_path, "rb").read()
+            outfile = f".web/public/{file_name}"
+
+            # Save the file.
+            with open(outfile, "wb") as file_object:
+                file_object.write(upload_data)
+
+            # Update the img var.
+            self.img.append(file_name)
+
+            # Set the files attribute
+            self.files.append(file_name)
+
+
+    async def handle_upload(
+        self, files: list[rx.UploadFile]
+    ):
+        """Handle the upload of file(s).
+
+        Args:
+            files: The uploaded files.
+        """
+        for file in files:
+            upload_data = await file.read()
+            outfile = f"C:/Users/chank/OneDrive/바탕 화면/Auroraproject/Aurora/.web/public/{file.filename}"
+
+            # Save the file.
+            with open(outfile, "wb") as file_object:
+                file_object.write(upload_data)
+
+            # Update the img var.
+            self.img.append(file.filename)
+    
+    async def post_tweet(self):
         """Post a tweet."""
         if not self.logged_in:
             return rx.window_alert("Please log in to post a tweet.")
+        if len(self.tweet)==0:
+            return rx.window_alert('Please write at least one character!')
+        
+        await self.handle_upload(rx.upload_files())
+        
         with rx.session() as session:
             tweet = Tweet(
                 author=self.user.username,
                 content=self.tweet,
                 created_at=datetime.now().strftime("%m/%d %H"),
+                image_content=", ".join(self.files),
             )
-            if len(self.tweet)==0:
-                return rx.window_alert('Please write at least one character!')
+            
             session.add(tweet)
             session.commit()
-            self.tweet=""
+            self.tweet = ""
+            
         return self.get_tweets()
+
 
     def get_tweets(self):
         """Get tweets from the database."""
@@ -125,3 +189,6 @@ class HomeState(State):
 
     def right(self):
         self.show_right = not (self.show_right)
+
+    def change(self):
+        self.show = not (self.show)
