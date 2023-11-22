@@ -182,35 +182,18 @@ def composer(AuthState):
             p=4,
         ),
         rx.box(
-            rx.button("write",),
+            rx.heading(HomeState.text)
+        ),
+        rx.box(
+            rx.button("write", on_click=HomeState.change),
             rx.modal(
                 rx.modal_overlay(
                     rx.modal_content(
-                        rx.modal_header("write", on_click=HomeState.change),
+                        rx.modal_header("write"),
                         rx.modal_body(
                             rx.text_area(
-                                value = HomeState.tweet,
-                                w="100%",
-                                border=0,
-                                placeholder="What's happening?",  # 트윗을 작성하는 입력 상자
-                                resize="none",
-                                py=4,
-                                px=0,
-                                _focus={"border": 0, "outline": 0, "boxShadow": "none"},
-                                on_change=HomeState.set_tweet,
-                            ),
-                            rx.hstack(
-                                rx.button(
-                                    "Upload",
-                                    on_click=HomeState.post_tweet,
-                                    bg="rgb(0,128,0)",
-                                    color="white",
-                                    border_radius="full",
-                                ),  # 트윗을 게시하는 버튼
-                                justify_content="flex-end",
-                                border_top="1px solid #ededed",
-                                px=4,
-                                py=2,
+                                value=HomeState.text,
+                                on_change=HomeState.set_text,
                             ),
                         ),
                         rx.modal_footer(

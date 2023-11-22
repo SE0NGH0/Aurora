@@ -26,6 +26,8 @@ class HomeState(State):
 
     img: list[str]
     files: list[str] = []  # Add files attribute
+
+    text: str = ""
     
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
@@ -193,3 +195,5 @@ class HomeState(State):
 
     def change(self):
         self.show = not (self.show)
+
+    
