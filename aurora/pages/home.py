@@ -233,11 +233,15 @@ def composer(HomeState):
 # 개별 트윗을 표시하는 함수
 def tweet(tweet):
     """Display for an individual tweet in the feed."""
-    image_tags = rx.foreach(
-        tweet.image_content.split(", "),
-        lambda image: rx.image(src=f"C:/Users/chank/OneDrive/바탕 화면/Auroraproject/Aurora/.web/public/{image}", alt="tweet image")
+    image_tags = rx.cond(
+        tweet.image_content,
+        rx.foreach(
+            tweet.image_content.split(", "),
+            lambda image: rx.image(src=f"/{image}", alt="tweet image")
+        ),
+        rx.box()  # 이미지가 없는 경우 빈 리스트를 반환합니다.
     ),
-    
+
     return rx.grid(
         rx.vstack(
             rx.avatar(name=tweet.author, size="sm"),  # 트윗 작성자의 아바타 이미지

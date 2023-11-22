@@ -19,15 +19,14 @@ class HomeState(State):
     friend: str
     search: str
 
-    img: list[str]
-    files: list[str] = []  # Add files attribute
-
-
     show_right: bool = False
     show_top: bool = False
 
     show: bool = False
 
+    img: list[str]
+    files: list[str] = []  # Add files attribute
+    
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
         root = tk.Tk()
@@ -65,7 +64,7 @@ class HomeState(State):
         """
         for file in files:
             upload_data = await file.read()
-            outfile = f"C:/Users/chank/OneDrive/바탕 화면/Auroraproject/Aurora/.web/public/{file.filename}"
+            outfile = f"/{file.filename}"
 
             # Save the file.
             with open(outfile, "wb") as file_object:
