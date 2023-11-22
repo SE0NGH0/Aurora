@@ -28,6 +28,7 @@ class HomeState(State):
     files: list[str] = []  # Add files attribute
 
     status_message: str
+    status_messages: list[str] = []
     
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
@@ -209,5 +210,13 @@ class HomeState(State):
         return self.get_status_messages()
 
     def get_status_messages(self):
+        """Get tweets from the database."""
         with rx.session() as session:
-            self.status_message = session.query(Status_message)
+            if self.search:
+                self.status_messages = (
+                    session.query(Status_message)
+                    .filter(Status_message.content.contains(self.search))
+                    .all()[::-1]
+                )
+            else:
+                self.status_messages = session.query(Status_message).all()[::-1]

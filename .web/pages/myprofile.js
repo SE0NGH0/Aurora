@@ -108,9 +108,11 @@ export default function Component() {
 </Text>
 </HStack>
   <HStack>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.get_status_messages", {})], (_e), {})}>
   <Text>
-  {state.home_state.status_message}
+  {`...`}
 </Text>
+</Button>
 </HStack>
   <Box>
   <Modal isOpen={state.home_state.show}>
@@ -123,9 +125,14 @@ export default function Component() {
   <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_status_message", {value:_e0.target.value})], (_e0), {})} placeholder={`상태 메세지`} sx={{"w": "600px", "border": 2, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}} value={state.home_state.status_message}/>
 </ModalBody>
   <ModalFooter>
+  <HStack>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.post_status_message", {})], (_e), {})}>
+  {`Confirm`}
+</Button>
   <Button onClick={(_e) => addEvents([Event("state.home_state.change", {})], (_e), {})}>
   {`Close`}
 </Button>
+</HStack>
 </ModalFooter>
 </ModalContent>
 </ModalOverlay>
@@ -146,15 +153,15 @@ export default function Component() {
   <DrawerContent sx={{"bg": "rgba(100, 100, 100, 0.7)"}}>
   <DrawerHeader>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((nqxhfego, mywsvrrs) => (
-  <VStack key={mywsvrrs} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((fgmqasvd, fozgfcfr) => (
+  <VStack key={fozgfcfr} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={nqxhfego.username} size={`sm`}/>
+  <Avatar name={fgmqasvd.username} size={`sm`}/>
   <Text>
-  {nqxhfego.username}
+  {fgmqasvd.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:nqxhfego.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:fgmqasvd.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -166,12 +173,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((uufoeixl, zbpsdcgq) => (
-  <VStack key={zbpsdcgq} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((phnkajhw, kgzmcdhu) => (
+  <VStack key={kgzmcdhu} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={uufoeixl.follower_username} size={`sm`}/>
+  <Avatar name={phnkajhw.follower_username} size={`sm`}/>
   <Text>
-  {uufoeixl.follower_username}
+  {phnkajhw.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -182,15 +189,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((etxozyzo, sysvnuho) => (
-  <VStack key={sysvnuho} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((hcimogcn, xgvllxph) => (
+  <VStack key={xgvllxph} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={etxozyzo.followed_username} size={`sm`}/>
+  <Avatar name={hcimogcn.followed_username} size={`sm`}/>
   <Text>
-  {etxozyzo.followed_username}
+  {hcimogcn.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:etxozyzo.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:hcimogcn.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>

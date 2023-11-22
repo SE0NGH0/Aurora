@@ -181,7 +181,10 @@ def composer(AuthState):
             p=4,  
         ),
         rx.hstack(
-            rx.text(HomeState.status_message)
+            rx.button(
+                rx.text("..."), 
+                on_click=HomeState.get_status_messages,
+            ),
         ),
         rx.box(
             rx.modal(
@@ -202,9 +205,14 @@ def composer(AuthState):
                             ),
                         ),
                         rx.modal_footer(
-                            rx.button(
-                                "Close", on_click=HomeState.change
-                            )
+                            rx.hstack(
+                                rx.button(
+                                    "Confirm", on_click=HomeState.post_status_message,
+                                ),
+                                rx.button(
+                                    "Close", on_click=HomeState.change
+                                ),
+                            ),
                         ),
                     )
                 ),
