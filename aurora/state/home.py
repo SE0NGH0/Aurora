@@ -1,13 +1,15 @@
 """The state for the home page."""
 from datetime import datetime
-
 import reflex as rx
-
 from .base import Follows, State, Tweet, User, Status_message
-
-import os
+import os,json
 import tkinter as tk
 from tkinter import filedialog
+import requests
+import pandas as pd
+import numpy as np
+import folium
+from folium.plugins import MiniMap
 
 
 class HomeState(State):
@@ -29,6 +31,15 @@ class HomeState(State):
 
     status_message: str
     status_messages: list[str] = []
+
+    REST_API_KEY: str
+    locations: list[str]
+    df:pd.DataFrame  
+    map_html:str
+    tag_search:str
+    map_html:str = "/map.html"
+    map_iframe:str = f'<iframe src="{map_html}" width="100%" height="600"></iframe>'
+    map_search_check:bool=False
     
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
@@ -212,4 +223,95 @@ class HomeState(State):
     def change(self):
         self.show = not (self.show)
 
+    def kakao_api(self): 
+        key=''
+        with open('key.json','r')as f:
+            key = json.load(f)
+        self.REST_API_KEY = key['key']
+        
+    def elec_location(self,region,page_num):
+        self.kakao_api()
+        url = 'https://dapi.kakao.com/v2/local/search/keyword.json'
+        params = {'query': region,'page': page_num}
+        headers = {"Authorization": f'KakaoAK {self.REST_API_KEY}'}
+
+        places = requests.get(url, params=params, headers=headers).json()['documents']
+        return places
     
+    def elec_info(self,places):
+        X = []
+        Y = []
+        stores = []
+        road_address = []
+        place_url = []
+        ID = []
+        for place in places:
+            X.append(float(place['x']))
+            Y.append(float(place['y']))
+            stores.append(place['place_name'])
+            road_address.append(place['road_address_name'])
+            place_url.append(place['place_url'])
+            ID.append(place['id'])
+
+        ar = np.array([ID,stores, X, Y, road_address,place_url]).T
+        df = pd.DataFrame(ar, columns = ['ID','stores', 'X', 'Y','road_address','place_url'])
+        return df
+    
+    def keywords(self):
+        df = None
+        for loca in self.locations:
+            for page in range(1,4):
+                local_name = self.elec_location(loca, page)
+                local_elec_info = self.elec_info(local_name)
+
+                if df is None:
+                    df = local_elec_info
+                elif local_elec_info is None:
+                    continue
+                else:
+                    df = pd.concat([df, local_elec_info],join='outer', ignore_index = True)
+        return df
+    
+    def make_map(self,dfs):
+        # 지도 생성하기
+        m = folium.Map(location=[37.5518911,126.9917937],   # 기준좌표: 제주어딘가로 내가 대충 설정
+                    zoom_start=12)
+
+        # 미니맵 추가하기
+        minimap = MiniMap() 
+        m.add_child(minimap)
+
+        # 마커 추가하기
+        for i in range(len(dfs)):
+            folium.Marker([self.df['Y'][i],self.df['X'][i]],
+                    tooltip=dfs['stores'][i],
+                    popup=dfs['place_url'][i],
+                    ).add_to(m)
+        m.save('assets/map2.html')
+        self.map_html = "/map2.html"
+        self.map_iframe = f'<iframe src="{self.map_html}" width="100%" height="600"></iframe>'
+    
+    def search_map(self):
+        self.df = self.keywords()
+        self.df = self.df.drop_duplicates(['ID'])
+        self.df = self.df.reset_index()
+        self.make_map(self.df)
+        
+    def map(self):
+        m = folium.Map(location=[37.5518911, 126.9917937], zoom_start=12)
+        
+    def map_search(self):
+        if self.map_search_check == True:
+            return rx.window_alert('Express clear first!')
+        self.locations = self.tag_search.split(',')
+        self.search_map()
+        self.map_search_check = True
+        
+    def clear_map(self):
+        self.map_search_check = False
+        if os.path.exists('assets/map2.html'):
+            os.remove('assets/map2.html')
+        self.map_html = "/map.html"
+        self.map_iframe = f'<iframe src="{self.map_html}" width="100%" height="600"></iframe>'
+        self.locations=[]
+        self.tag_search=""

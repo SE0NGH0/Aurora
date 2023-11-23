@@ -5,7 +5,7 @@ import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from 
 import "focus-visible/dist/focus-visible"
 import { Avatar, Box, Button, Container, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Text, Textarea, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
-import { AddIcon, ArrowLeftIcon, MinusIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
+import { AddIcon, ArrowLeftIcon, InfoIcon, MinusIcon, MoonIcon, Search2Icon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
 import { DebounceInput } from "react-debounce-input"
 import NextHead from "next/head"
@@ -80,6 +80,14 @@ export default function Component() {
   <Link as={NextLink} href={`/`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
   <StarIcon sx={{"mr": 2}}/>
   {`Home`}
+</Link>
+  <Link as={NextLink} href={`/`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
+  <Search2Icon sx={{"mr": 2}}/>
+  {`Search`}
+</Link>
+  <Link as={NextLink} href={`/maps`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
+  <InfoIcon sx={{"mr": 2}}/>
+  {`Maps`}
 </Link>
   <Button onClick={toggleColorMode}>
   <MoonIcon/>
@@ -160,15 +168,15 @@ export default function Component() {
   <DrawerContent sx={{"bg": "rgba(100, 100, 100, 0.7)"}}>
   <DrawerHeader>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((xqogsnsw, cxodefxj) => (
-  <VStack key={cxodefxj} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((rialdxei, mxkrvelm) => (
+  <VStack key={mxkrvelm} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={xqogsnsw.username} size={`sm`}/>
+  <Avatar name={rialdxei.username} size={`sm`}/>
   <Text>
-  {xqogsnsw.username}
+  {rialdxei.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:xqogsnsw.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:rialdxei.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -180,12 +188,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((kawszcqu, xjfhhiyy) => (
-  <VStack key={xjfhhiyy} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((dpagzipc, vnzkzczu) => (
+  <VStack key={vnzkzczu} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={kawszcqu.follower_username} size={`sm`}/>
+  <Avatar name={dpagzipc.follower_username} size={`sm`}/>
   <Text>
-  {kawszcqu.follower_username}
+  {dpagzipc.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -196,15 +204,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((mczlgakr, dysvuazq) => (
-  <VStack key={dysvuazq} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((tfyjngrj, pnmjjhva) => (
+  <VStack key={pnmjjhva} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={mczlgakr.followed_username} size={`sm`}/>
+  <Avatar name={tfyjngrj.followed_username} size={`sm`}/>
   <Text>
-  {mczlgakr.followed_username}
+  {tfyjngrj.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:mczlgakr.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:tfyjngrj.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>
