@@ -92,7 +92,6 @@ class HomeState(State):
                 created_at=datetime.now().strftime("%m/%d %H"),
                 image_content=", ".join(self.files),
             )
-            
             session.add(tweet)
             session.commit()
             self.tweet = ""
@@ -113,6 +112,22 @@ class HomeState(State):
                 )
             else:
                 self.tweets = session.query(Tweet).all()[::-1]
+
+    def post_status_message(self):
+        with rx.session() as session:
+            status_message = Status_message(
+                content=self.status_message,
+            )
+            session.add(status_message)
+            session.commit()
+            self.status_message = ""
+            
+        return self.get_status_messages()
+
+    def get_status_messages(self):
+        """Get all status messages from the database."""
+        with rx.session() as session:
+            self.status_messages = session.query(Status_message).all()[::-1]
 
     def set_search(self, search):
         """Set the search query."""
@@ -197,19 +212,4 @@ class HomeState(State):
     def change(self):
         self.show = not (self.show)
 
-    def post_status_message(self):
-        with rx.session() as session:
-            status_message = Status_message(
-                content=self.status_message,
-            )
-            
-            session.add(status_message)
-            session.commit()
-            self.status_message = ""
-            
-        return self.get_status_messages()
-
-    def get_status_messages(self):
-        """Get tweets from the database."""
-        with rx.session() as session:
-            self.status_messages = session.query(Status_message).all()[::-1]
+    

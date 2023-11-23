@@ -1,6 +1,6 @@
 # aurora.state.home 모듈에서 필요한 State 및 HomeState를 가져옵니다.
 import reflex as rx
-from aurora.state.base import State, Tweet
+from aurora.state.base import State, Tweet, Status_message
 from aurora.state.home import HomeState
 from aurora.state.auth import AuthState
 from aurora.state.base import User
@@ -180,12 +180,6 @@ def composer(AuthState):
             rx.text(AuthState.username, size = "md", fontSize = "18px", fontWeight = "bold"),    
             p=4,  
         ),
-        rx.hstack(
-            rx.button(
-                rx.text("..."), 
-                on_click=HomeState.get_status_messages,
-            ),
-        ),
         rx.box(
             rx.modal(
                 rx.modal_overlay(
@@ -220,31 +214,37 @@ def composer(AuthState):
             )
         )
     )
-
+"""
 # 개별 트윗을 표시하는 함수
-def tweet(tweet):
-    """Display for an individual tweet in the feed."""
-    return rx.grid(
-        rx.vstack(
-            rx.avatar(name=tweet.author, size="sm"),  # 트윗 작성자의 아바타 이미지
-        ),
-        rx.box(
-            rx.text("@" + tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
-            rx.text(tweet.content, width="100%"),  # 트윗 내용
-        ),
-        grid_template_columns="1fr 5fr",
+def edit_profile(status_message):
+    print(f"status_message: {status_message}")
+    return rx.box(
+        rx.text(status_message.content, width="100%"),  # 트윗 내용
         py=4,
         gap=1,
         border_bottom="1px solid #ededed",
-    )
-
+    ),
+"""
 # 피드 영역
 def feed(HomeState):
     """The feed."""
     return rx.box(
         feed_header(HomeState),
         composer(AuthState),
-        
+        """
+        rx.cond(
+            HomeState.status_messages,
+            rx.foreach(
+                HomeState.status_messages,
+                edit_profile
+            ),
+            rx.hstack(
+                rx.button(
+                    rx.text("..."), 
+                    on_click=HomeState.get_status_messages,
+                ),
+            ),
+        ),"""
     )
 
 # 마이 페이지
