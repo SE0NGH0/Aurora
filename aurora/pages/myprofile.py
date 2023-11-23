@@ -76,7 +76,7 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("Search", "/"),
+            tab_button2("Search", "/search"),
             tab_button3("Maps", "/maps"),
             rx.button(
                 rx.icon(tag="moon"),

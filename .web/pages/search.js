@@ -5,7 +5,7 @@ import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from 
 import "focus-visible/dist/focus-visible"
 import { Box, Button, Container, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
-import { AtSignIcon, MoonIcon, Search2Icon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
+import { AtSignIcon, InfoIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
 import NextHead from "next/head"
 
@@ -80,13 +80,13 @@ export default function Component() {
   <StarIcon sx={{"mr": 2}}/>
   {`Home`}
 </Link>
-  <Link as={NextLink} href={`/myprofile`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 5, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
+  <Link as={NextLink} href={`/myprofile`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
   <AtSignIcon sx={{"mr": 2}}/>
   {`My Profile`}
 </Link>
-  <Link as={NextLink} href={`/search`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
-  <Search2Icon sx={{"mr": 2}}/>
-  {`Search`}
+  <Link as={NextLink} href={`/maps`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
+  <InfoIcon sx={{"mr": 2}}/>
+  {`Maps`}
 </Link>
   <Button onClick={toggleColorMode}>
   <MoonIcon/>
@@ -97,20 +97,13 @@ export default function Component() {
   <Container sx={{"height": "200px"}}/>
 </VStack>
 </Box>
-  <Box sx={{"borderX": "3px solid #ededed", "h": "100%"}}>
+  <Box>
   <HStack justify={`space-between`} sx={{"p": 4, "borderBottom": "3px solid #ededed"}}>
   <Heading size={`md`}>
-  {`Maps`}
+  {`Story`}
 </Heading>
-  <Input onChange={(_e0) => addEvents([Event("state.home_state.set_tag_search", {value:_e0.target.value})], (_e0), {})} placeholder={`Search tags`} type={`text`}/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.map_search", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
-  {`Search`}
-</Button>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.clear_map", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
-  {`clear`}
-</Button>
+  <Input onChange={(_e0) => addEvents([Event("state.home_state.set_search", {search:_e0.target.value})], (_e0), {})} placeholder={`Search`} type={`text`}/>
 </HStack>
-  <Box dangerouslySetInnerHTML={{"__html": state.home_state.map_iframe}}/>
 </Box>
 </Grid>
 </Container>
