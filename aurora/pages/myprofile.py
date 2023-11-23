@@ -190,26 +190,20 @@ def sidebar(HomeState):
         )
     )
 
-# 피드의 헤더
-def feed_header(HomeState):
-    """The header of the feed."""
-    return rx.hstack(
-        rx.heading("Story", size="md"),  # 피드의 제목
-        rx.input(on_change=HomeState.set_search, placeholder="Search"),  # 트윗 검색을 위한 입력 상자
-        justify="space-between",
-        p=4,
-        border_bottom="1px solid #ededed",
-    )
-
-def composer(AuthState):
-    """The composer for new tweets."""
+def my_name(AuthState):
     return rx.grid(
+        rx.container(height='16px'),
         rx.button("Edit Profile", on_click=HomeState.change),
         rx.hstack(
             rx.avatar(size="md"),  # 사용자의 아바타 이미지
             rx.text(AuthState.username, size = "md", fontSize = "18px", fontWeight = "bold"),    
             p=4,  
         ),
+    )
+
+def composer(HomeState):
+    """The composer for new tweets."""
+    return rx.grid(
         rx.box(
             rx.modal(
                 rx.modal_overlay(
@@ -247,7 +241,6 @@ def composer(AuthState):
 """
 # 개별 트윗을 표시하는 함수
 def edit_profile(status_message):
-    print(f"status_message: {status_message}")
     return rx.box(
         rx.text(status_message.content, width="100%"),  # 트윗 내용
         py=4,
@@ -259,8 +252,8 @@ def edit_profile(status_message):
 def feed(HomeState):
     """The feed."""
     return rx.box(
-        feed_header(HomeState),
-        composer(AuthState),
+        my_name(AuthState),
+        composer(HomeState),
         """
         rx.cond(
             HomeState.status_messages,
