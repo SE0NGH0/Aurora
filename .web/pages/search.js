@@ -100,7 +100,7 @@ export default function Component() {
   <Box>
   <HStack justify={`space-between`} sx={{"p": 4, "borderBottom": "3px solid #ededed"}}>
   <Heading size={`md`}>
-  {`Story`}
+  {`Search`}
 </Heading>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_search", {search:_e0.target.value})], (_e0), {})} placeholder={`Search`} type={`text`}/>
 </HStack>

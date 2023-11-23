@@ -85,11 +85,12 @@ def tabs():
         py=4,
     )
 
+
 # 피드의 헤더
 def feed_header(HomeState):
     """The header of the feed."""
     return rx.hstack(
-        rx.heading("Story", size="md"),  # 피드의 제목
+        rx.heading("Search", size="md"),  # 피드의 제목
         rx.input(on_change=HomeState.set_search, placeholder="Search"),  # 트윗 검색을 위한 입력 상자
         justify="space-between",
         p=4,
@@ -102,6 +103,8 @@ def feed(HomeState):
     return rx.box(
         feed_header(HomeState),
     )
+
+
 
 # 홈 페이지
 def search():

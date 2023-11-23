@@ -11,6 +11,13 @@ import numpy as np
 import folium
 from folium.plugins import MiniMap
 
+# Naver_client_id = Db_7CrOsJ5oCDAJhgcEd
+# Naver_client_secret = 4Z7D86omvi
+# Kakao_API_key= 581cb68cc0c8d58c66f0397b3662b716
+# Google_SEARCH_ENGINE_ID = 264f47a7c01764470
+# Google_API_KEY = AIzaSyDFJsmEWB2yag7jm6n-DoPe5z50XYkIOtE
+
+
 
 class HomeState(State):
     """The state for the home page."""
@@ -40,6 +47,10 @@ class HomeState(State):
     map_html:str = "/map.html"
     map_iframe:str = f'<iframe src="{map_html}" width="100%" height="600"></iframe>'
     map_search_check:bool=False
+
+    today = datetime.today().strftime("%Y%m%d")
+    query = "뇌진탕 | 외상성 뇌손상 | 두부외상"
+    wanted_row = 100
     
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
@@ -266,15 +277,17 @@ class HomeState(State):
 
                 if df is None:
                     df = local_elec_info
+                    print("First iteration: df =", df)
                 elif local_elec_info is None:
                     continue
                 else:
                     df = pd.concat([df, local_elec_info],join='outer', ignore_index = True)
+                    print("Concentration: df =", df)
         return df
     
     def make_map(self,dfs):
         # 지도 생성하기
-        m = folium.Map(location=[37.5518911,126.9917937],   # 기준좌표: 제주어딘가로 내가 대충 설정
+        m = folium.Map(location=[37.5518911, 126.9917937],   # 기준좌표: 제주어딘가로 내가 대충 설정
                     zoom_start=12)
 
         # 미니맵 추가하기
@@ -283,11 +296,13 @@ class HomeState(State):
 
         # 마커 추가하기
         for i in range(len(dfs)):
-            folium.Marker([self.df['Y'][i],self.df['X'][i]],
-                    tooltip=dfs['stores'][i],
-                    popup=dfs['place_url'][i],
-                    ).add_to(m)
+            marker = folium.Marker([dfs['Y'][i],dfs['X'][i]],
+                                   tooltip=dfs['stores'][i],
+                                   popup=dfs['place_url'][i],
+                                )
+            marker.add_to(m)
         m.save('assets/map2.html')
+        
         self.map_html = "/map2.html"
         self.map_iframe = f'<iframe src="{self.map_html}" width="100%" height="600"></iframe>'
     
@@ -315,3 +330,5 @@ class HomeState(State):
         self.map_iframe = f'<iframe src="{self.map_html}" width="100%" height="600"></iframe>'
         self.locations=[]
         self.tag_search=""
+
+    
