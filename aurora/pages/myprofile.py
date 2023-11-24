@@ -329,7 +329,7 @@ def feed(HomeState):
                         mr=1,
                     ),
                     rx.text("My Posts"),
-                    on_click=HomeState.get_tweets,
+                    on_click=HomeState.get_user_tweets,
                 ),  # 트윗을 불러오는 버튼
                 p=4,
             ),

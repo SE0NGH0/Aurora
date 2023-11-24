@@ -131,6 +131,14 @@ class HomeState(State):
             else:
                 self.tweets = session.query(Tweet).all()[::-1]
 
+    def get_user_tweets(self):
+        with rx.session() as session:
+                self.tweets = (
+                    session.query(Tweet)
+                    .filter(Tweet.author == self.user.username)
+                    .all()[::-1]
+                )
+
     def post_status_message(self):
         with rx.session() as session:
             status_message = Status_message(
