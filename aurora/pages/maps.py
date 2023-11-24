@@ -89,7 +89,7 @@ def tabs():
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile", "/myprofile"),
-            tab_button3("Search", "/search"),
+            tab_button3("Search", "/websearch"),
             tab_button4("Video", "/video"),
             rx.button(
                 rx.icon(tag="moon"),
@@ -110,7 +110,7 @@ def feed_header(HomeState):
     """The header of the feed."""
     return rx.hstack(
         rx.heading("Maps", size="md"),  # 피드의 제목
-        rx.input(on_change=HomeState.set_tag_search, placeholder="Search tags"),  # 트윗 검색을 위한 입력 상자
+        rx.input(on_change=HomeState.set_tag_search, placeholder="Search tags.."),  # 트윗 검색을 위한 입력 상자
         rx.button(
             "Search",
             on_click = HomeState.map_search,
@@ -154,7 +154,7 @@ def maps():
         rx.grid(
             tabs(),
             feed(HomeState),
-            grid_template_columns="1fr 4fr",
+            grid_template_columns="1fr 4fr 1fr",
             h="100vh",
             gap=4,
         ),

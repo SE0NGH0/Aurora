@@ -90,7 +90,7 @@ def tabs():
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile", "/myprofile"),
-            tab_button3("Search", "/search"),
+            tab_button3("Search", "/websearch"),
             tab_button4("Maps", "/maps"),
             rx.button(
                 rx.icon(tag="moon"),

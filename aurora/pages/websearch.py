@@ -6,6 +6,9 @@ from aurora.state.home import HomeState
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
+
+color = "rgb(107,99,246)"
+# 탭 버튼을 생성하는 함수
 def tab_button1(name, href):
     """A tab switcher button."""
     return rx.link(
@@ -100,13 +103,76 @@ def tabs():
         py=4,
     )
 
+def trend(key: str, value: str):
+    return rx.vstack(
+        rx.container(
+            rx.container(
+                rx.text(f'{key}위 : {value}'),
+            ),
+            align='start',
+            width='250px',
+            font_weight="bold",
+        ),
+        align='start',
+    )
+
+def sidebar(HomeState):
+    """The sidebar displayed on the right."""
+    return rx.grid(
+        rx.vstack(
+            rx.container(
+                rx.button(
+                    '실시간 검색어',
+                    on_click = HomeState.google_crawler,
+                    border_radius="1em",
+                    box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+                    background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                    box_sizing="border-box",
+                    color="white",
+                    opacity="0.6",
+                    _hover={"opacity": 1},
+                ),
+            ),
+            align_items="start",
+            gap=4,
+            h="100%",
+            py=4,
+        ),
+        rx.vstack(
+            rx.foreach(
+                HomeState.web_trend,
+                lambda entry: trend(
+                    entry[0],entry[1]
+                ),
+            ),
+        ),
+        grid_template_rows="1fr 9fr",
+        align_items="start",
+        gap=4,
+        h="100%",
+        py=4,
+    )
+    
+
 
 # 피드의 헤더
 def feed_header(HomeState):
+    
     """The header of the feed."""
     return rx.hstack(
         rx.heading("Search", size="md"),  # 피드의 제목
-        rx.input(on_change=HomeState.set_search, placeholder="Search"),  # 트윗 검색을 위한 입력 상자
+        rx.input(on_blur=HomeState.set_video_search, placeholder="Search.."),  # 트윗 검색을 위한 입력 상자
+        rx.button(
+            "Search",
+            on_click = HomeState.search_video,
+            border_radius="1em",
+            box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+            background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+            box_sizing="border-box",
+            color="white",
+            opacity="0.6",
+            _hover={"opacity": 1},
+        ),
         justify="space-between",
         p=4,
         border_bottom="3px solid #ededed",
@@ -114,20 +180,27 @@ def feed_header(HomeState):
 
 # 피드 영역
 def feed(HomeState):
-    """The feed."""
     return rx.box(
         feed_header(HomeState),
+        rx.video(
+            url = HomeState.show_video,
+            max_width = '700px',
+            max_height = 'auto',
+            playing = True,
+            loop = True,
+        ),
+        h="100%",
     )
 
-
-
 # 홈 페이지
-def search():
+def websearch():
+    State.check_login
     return container(
         rx.grid(
             tabs(),
             feed(HomeState),
-            grid_template_columns="1fr 4fr",
+            sidebar(HomeState),
+            grid_template_columns="1fr 4fr 1fr",
             h="100vh",
             gap=4,
         ),

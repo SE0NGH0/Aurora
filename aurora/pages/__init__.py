@@ -5,5 +5,5 @@ from .signup import signup
 from .findpassword import findpassword
 from .myprofile import myprofile
 from .maps import maps
-from .search import search
+from .websearch import websearch
 from .video import video

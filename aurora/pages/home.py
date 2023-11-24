@@ -103,7 +103,7 @@ def tabs():
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile", "/myprofile"),
-            tab_button3("Search", "/search"),
+            tab_button3("Search", "/websearch"),
             tab_button4("Video", "/video"),
             tab_button5("Maps", "/maps"),
             rx.button(
@@ -124,7 +124,7 @@ def sidebar(HomeState):
     return rx.vstack(
         rx.input(
             on_change=HomeState.set_friend,
-            placeholder="Search users",  # 사용자 검색을 위한 입력 상자
+            placeholder="Search users..",  # 사용자 검색을 위한 입력 상자
             width="100%",
         ),
         rx.foreach(
@@ -194,7 +194,7 @@ def feed_header(HomeState):
     """The header of the feed."""
     return rx.hstack(
         rx.heading("Story", size="md"),  # 피드의 제목
-        rx.input(on_change=HomeState.set_search, placeholder="Search"),  # 트윗 검색을 위한 입력 상자
+        rx.input(on_change=HomeState.set_search, placeholder="Search.."),  # 트윗 검색을 위한 입력 상자
         justify="space-between",
         p=4,
         border_bottom="3px solid #ededed",
@@ -323,7 +323,7 @@ def home():
             tabs(),
             feed(HomeState),
             sidebar(HomeState),
-            grid_template_columns="1fr 3fr 1fr",
+            grid_template_columns="1fr 4fr 1fr",
             h="100vh",
             gap=4,
         ),

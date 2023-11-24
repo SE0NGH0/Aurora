@@ -90,7 +90,7 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("Search", "/search"),
+            tab_button2("Search", "/websearch"),
             tab_button3("Video", "/video"),
             tab_button4("Maps", "/maps"),
             rx.button(
@@ -293,7 +293,7 @@ def myprofile():
             tabs(),
             feed(HomeState),
             sidebar(HomeState),
-            grid_template_columns="1fr 3.5fr 0.5fr",
+            grid_template_columns="1fr 4fr 1fr",
             h="100vh",
             gap=4,
         ),
