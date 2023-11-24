@@ -86,7 +86,7 @@ def tabs():
         rx.vstack(
             rx.container(
                 rx.hstack(
-                    rx.icon(tag="spinner", mr=2, color='green'),  # 달 모양 아이콘
+                    rx.image(src="/aurora2.ico", width="50px", height="30px"),  # 오로라 아이콘
                     rx.text(
                         "Aurora", 
                         style={
@@ -220,20 +220,28 @@ def composer(HomeState):
             ),
         ),
         rx.hstack(
-            rx.button(
+             rx.button(
                 "Select File",
-                color=color,
-                bg="white",
-                border=f"1px solid {color}",
+                color="white",  # Text color
+                bg="lightgray",  # Default background color
                 on_click=HomeState.handle_file_selection,
-                style={"margin": "0", "padding": "10px"}
+                style={
+                    "margin": "0",
+                    "padding": "10px",
+                    "border": "none",  # Remove border
+                    "_hover": {
+                        "bg": "darkgray",  # Background color on hover
+                    },
+                    "_active": {
+                        "bg": "gray",  # Background color on click
+                    },
+                }
             ),
             rx.button(
                 "Tweet",
                 on_click= HomeState.post_tweet,
                 border_radius="1em",
-                box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-                background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                 box_sizing="border-box",
                 color="white",
                 opacity="0.6",

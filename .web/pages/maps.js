@@ -3,10 +3,10 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Container, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Container, Grid, Heading, HStack, Image, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
-import { AtSignIcon, LinkIcon, MoonIcon, Search2Icon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
+import { AtSignIcon, InfoIcon, LinkIcon, MoonIcon, Search2Icon, StarIcon } from "@chakra-ui/icons"
 import NextHead from "next/head"
 
 
@@ -70,7 +70,7 @@ export default function Component() {
   <VStack alignItems={`left`} sx={{"gap": 4}}>
   <Container>
   <HStack>
-  <SpinnerIcon sx={{"mr": 2, "color": "green"}}/>
+  <Image src={`/aurora2.ico`} sx={{"width": "50px", "height": "30px"}}/>
   <Text sx={{"fontSize": "25px", "fontWeight": "bolder", "fontFamily": "Open Sans,Sans-serif", "background": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "-webkit-background-clip": "text", "color": "transparent", "centerContent": true}}>
   {`Aurora`}
 </Text>
@@ -92,6 +92,10 @@ export default function Component() {
   <LinkIcon sx={{"mr": 2}}/>
   {`Video`}
 </Link>
+  <Link as={NextLink} href={`/maps`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
+  <InfoIcon sx={{"mr": 2}}/>
+  {`Maps`}
+</Link>
   <Button onClick={toggleColorMode}>
   <MoonIcon/>
 </Button>
@@ -101,7 +105,7 @@ export default function Component() {
   <Container sx={{"height": "200px"}}/>
 </VStack>
 </Box>
-  <Box sx={{"h": "100%"}}>
+  <Box sx={{"borderX": "3px solid #ededed", "h": "100%"}}>
   <HStack justify={`space-between`} sx={{"p": 4, "borderBottom": "3px solid #ededed"}}>
   <Heading size={`md`}>
   {`Maps`}
@@ -110,7 +114,7 @@ export default function Component() {
   <Button onClick={(_e) => addEvents([Event("state.home_state.map_search", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
   {`Search`}
 </Button>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.clear_map", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.map_clear", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
   {`clear`}
 </Button>
 </HStack>

@@ -65,6 +65,20 @@ def tab_button4(name, href):
         font_weight="semibold",
         border_radius="full",
     )
+def tab_button5(name, href):
+    """A tab switcher button."""
+    return rx.link(
+        rx.icon(tag="info", mr=2),  # 별 모양 아이콘
+        name,  # 버튼 텍스트
+        display="inline-flex",
+        align_items="center",
+        py=3,
+        px=6,
+        href=href,  # 버튼 클릭 시 이동할 경로
+        border="1px solid #eaeaea",
+        font_weight="semibold",
+        border_radius="full",
+    )
 # 왼쪽에 표시되는 탭 스위처
 def tabs():
     """The tab switcher displayed on the left."""
@@ -72,7 +86,7 @@ def tabs():
         rx.vstack(
             rx.container(
                 rx.hstack(
-                    rx.icon(tag="spinner", mr=2, color='green'),  # 달 모양 아이콘
+                    rx.image(src="/aurora2.ico", width="50px", height="30px"),  # 오로라 아이콘
                     rx.text(
                         "Aurora", 
                         style={
@@ -91,6 +105,7 @@ def tabs():
             tab_button2("My Profile", "/myprofile"),
             tab_button3("Search", "/websearch"),
             tab_button4("Video", "/video"),
+            tab_button5("Maps", "/maps"),
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
@@ -124,7 +139,7 @@ def feed_header(HomeState):
         ),
         rx.button(
             "clear",
-            on_click = HomeState.clear_map,
+            on_click = HomeState.map_clear,
             border_radius="1em",
             box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
             background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
@@ -140,16 +155,22 @@ def feed_header(HomeState):
 
 # 피드 영역
 def feed(HomeState):
+    HomeState.map_iframe1
+    HomeState.clear_map1
+    HomeState.clear_map2
+    HomeState.clear_map3
     return rx.box(
         feed_header(HomeState),
         rx.container(height='10px'),
-        rx.html(HomeState.map_iframe),  # Add this line to include the map iframe
+        rx.html(HomeState.map_iframe),
+        border_x="3px solid #ededed",
         h="100%",
     )
 
+
 # 홈 페이지
 def maps():
-    """The home page."""
+    State.check_login
     return container(
         rx.grid(
             tabs(),

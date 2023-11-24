@@ -8,10 +8,9 @@ from aurora.state.base import User
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
-
+"""
 # 탭 버튼을 생성하는 함수
 def tab_button1(name, href):
-    """A tab switcher button."""
     return rx.link(
         rx.icon(tag="star", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -25,7 +24,19 @@ def tab_button1(name, href):
         border_radius="full",
     )
 def tab_button2(name, href):
-    """A tab switcher button."""
+    return rx.link(
+        rx.icon(tag="at_sign", mr=2),  # 별 모양 아이콘
+        name,  # 버튼 텍스트
+        display="inline-flex",
+        align_items="center",
+        py=3,
+        px=5,
+        href=href,  # 버튼 클릭 시 이동할 경로
+        border="1px solid #eaeaea",
+        font_weight="semibold",
+        border_radius="full",
+    )
+def tab_button3(name, href):
     return rx.link(
         rx.icon(tag="search2", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -38,8 +49,7 @@ def tab_button2(name, href):
         font_weight="semibold",
         border_radius="full",
     )
-def tab_button3(name, href):
-    """A tab switcher button."""
+def tab_button4(name, href):
     return rx.link(
         rx.icon(tag="link", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -52,8 +62,7 @@ def tab_button3(name, href):
         font_weight="semibold",
         border_radius="full",
     )
-def tab_button4(name, href):
-    """A tab switcher button."""
+def tab_button5(name, href):
     return rx.link(
         rx.icon(tag="info", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -69,12 +78,11 @@ def tab_button4(name, href):
 
 # 왼쪽에 표시되는 탭 스위처
 def tabs():
-    """The tab switcher displayed on the left."""
     return rx.box(
         rx.vstack(
             rx.container(
                 rx.hstack(
-                    rx.icon(tag="spinner", mr=2, color='green'),  # 달 모양 아이콘
+                    rx.image(src="/aurora2.ico", width="50px", height="30px"),  # 오로라 아이콘
                     rx.text(
                         "Aurora", 
                         style={
@@ -90,9 +98,10 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("Search", "/websearch"),
-            tab_button3("Video", "/video"),
-            tab_button4("Maps", "/maps"),
+            tab_button2("My Profile", "/myprofile"),
+            tab_button3("Search", "/websearch"),
+            tab_button4("Video", "/video"),
+            tab_button5("Maps", "/maps"),
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
@@ -107,7 +116,6 @@ def tabs():
 
 # 오른쪽에 표시되는 사이드바
 def sidebar(HomeState):
-    """The sidebar displayed on the right."""
     return rx.box(
         rx.vstack(
             rx.container(height='8px'),
@@ -217,7 +225,6 @@ def my_name(AuthState):
     )
 
 def composer(HomeState):
-    """The composer for new tweets."""
     return rx.grid(
         rx.box(
             rx.modal(
@@ -265,11 +272,10 @@ def edit_profile(status_message):
 """
 # 피드 영역
 def feed(HomeState):
-    """The feed."""
     return rx.box(
         my_name(AuthState),
         composer(HomeState),
-        """
+
         rx.cond(
             HomeState.status_messages,
             rx.foreach(
@@ -282,13 +288,14 @@ def feed(HomeState):
                     on_click=HomeState.get_status_messages,
                 ),
             ),
-        ),"""
+        ),
     )
-
+"""
 # 마이 페이지
 def myprofile():
     """The home page."""
     return container(
+        """
         rx.grid(
             tabs(),
             feed(HomeState),
@@ -298,4 +305,5 @@ def myprofile():
             gap=4,
         ),
         max_width="1600px",
+        """
     )

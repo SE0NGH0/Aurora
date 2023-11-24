@@ -5,8 +5,8 @@ import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from 
 import "focus-visible/dist/focus-visible"
 import { Avatar, Box, Button, Container, Grid, Heading, HStack, Image, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Spacer, Text, Textarea, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
-import { AddIcon, AtSignIcon, InfoIcon, LinkIcon, MinusIcon, MoonIcon, RepeatIcon, Search2Icon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
+import { AddIcon, AtSignIcon, InfoIcon, LinkIcon, MinusIcon, MoonIcon, RepeatIcon, Search2Icon, StarIcon } from "@chakra-ui/icons"
 import { DebounceInput } from "react-debounce-input"
 import NextHead from "next/head"
 
@@ -71,7 +71,7 @@ export default function Component() {
   <VStack alignItems={`left`} sx={{"gap": 4}}>
   <Container>
   <HStack>
-  <SpinnerIcon sx={{"mr": 2, "color": "green"}}/>
+  <Image src={`/aurora2.ico`} sx={{"width": "50px", "height": "30px"}}/>
   <Text sx={{"fontSize": "25px", "fontWeight": "bolder", "fontFamily": "Open Sans,Sans-serif", "background": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "-webkit-background-clip": "text", "color": "transparent", "centerContent": true}}>
   {`Aurora`}
 </Text>
@@ -120,19 +120,19 @@ export default function Component() {
   <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_tweet", {value:_e0.target.value})], (_e0), {})} placeholder={`What's happening?`} sx={{"w": "600px", "border": 2, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}} value={state.home_state.tweet}/>
 </HStack>
   <HStack justifyContent={`flex-end`} sx={{"borderTop": "1px solid #ededed", "px": 4, "py": 2}}>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.handle_file_selection", {})], (_e), {})} sx={{"margin": "0", "padding": "10px", "color": "rgb(107,99,246)", "bg": "white", "border": "1px solid rgb(107,99,246)"}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.handle_file_selection", {})], (_e), {})} sx={{"margin": "0", "padding": "10px", "border": "none", "_hover": {"bg": "darkgray"}, "_active": {"bg": "gray"}, "color": "white", "bg": "lightgray"}}>
   {`Select File`}
 </Button>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.post_tweet", {})], (_e), {})} sx={{"margin-left": "auto", "borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.post_tweet", {})], (_e), {})} sx={{"margin-left": "auto", "borderRadius": "1em", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
   {`Tweet`}
 </Button>
 </HStack>
   <SimpleGrid columns={[2]} spacing={`5px`}>
-  {state.home_state.img.map((almucdfi, vtgionse) => (
-  <VStack key={vtgionse}>
-  <Image src={almucdfi}/>
+  {state.home_state.img.map((osyxpojo, mgeodaox) => (
+  <VStack key={mgeodaox}>
+  <Image src={osyxpojo}/>
   <Text>
-  {almucdfi}
+  {osyxpojo}
 </Text>
 </VStack>
 ))}
@@ -141,23 +141,23 @@ export default function Component() {
   <Fragment>
   {isTrue(state.home_state.tweets) ? (
   <Fragment>
-  {state.home_state.tweets.map((yvgubqqo, pgocbwen) => (
-  <Grid key={pgocbwen} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
+  {state.home_state.tweets.map((rvxvuign, kejzzthc) => (
+  <Grid key={kejzzthc} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
   <VStack>
-  <Avatar name={yvgubqqo.author} size={`sm`}/>
+  <Avatar name={rvxvuign.author} size={`sm`}/>
 </VStack>
   <Box>
   <Text sx={{"fontWeight": "bold"}}>
-  {("@" + yvgubqqo.author)}
+  {("@" + rvxvuign.author)}
 </Text>
   <Text sx={{"width": "100%"}}>
-  {yvgubqqo.content}
+  {rvxvuign.content}
 </Text>
   <Fragment>
-  {isTrue(yvgubqqo.image_content) ? (
+  {isTrue(rvxvuign.image_content) ? (
   <Fragment>
-  {yvgubqqo.image_content.split(", ").map((kunblhkw, dvxlltsz) => (
-  <Image alt={`tweet image`} key={dvxlltsz} src={`/${kunblhkw}`}/>
+  {rvxvuign.image_content.split(", ").map((jtazfjxm, kmecupcc) => (
+  <Image alt={`tweet image`} key={kmecupcc} src={`/${jtazfjxm}`}/>
 ))}
 </Fragment>
 ) : (
@@ -186,15 +186,15 @@ export default function Component() {
 </Box>
   <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users..`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((qtmifbkf, qqavudbz) => (
-  <VStack key={qqavudbz} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((lrzkjmvu, swpxoudf) => (
+  <VStack key={swpxoudf} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={qtmifbkf.username} size={`sm`}/>
+  <Avatar name={lrzkjmvu.username} size={`sm`}/>
   <Text>
-  {qtmifbkf.username}
+  {lrzkjmvu.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:qtmifbkf.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:lrzkjmvu.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -204,12 +204,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((gtjjudpa, tqnnwbfu) => (
-  <VStack key={tqnnwbfu} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((ylqinpdg, qzmuqbrw) => (
+  <VStack key={qzmuqbrw} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={gtjjudpa.follower_username} size={`sm`}/>
+  <Avatar name={ylqinpdg.follower_username} size={`sm`}/>
   <Text>
-  {gtjjudpa.follower_username}
+  {ylqinpdg.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -219,15 +219,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((ndbjanwr, esgftczq) => (
-  <VStack key={esgftczq} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((rbnqfpnt, zcpoierz) => (
+  <VStack key={zcpoierz} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={ndbjanwr.followed_username} size={`sm`}/>
+  <Avatar name={rbnqfpnt.followed_username} size={`sm`}/>
   <Text>
-  {ndbjanwr.followed_username}
+  {rbnqfpnt.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:ndbjanwr.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:rbnqfpnt.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>

@@ -3,14 +3,14 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Container, Grid, Heading, HStack, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
+import "gridjs/dist/theme/mermaid.css"
+import { Box, Button, Container, Grid, Heading, HStack, Image, Input, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
-import { AtSignIcon, InfoIcon, LinkIcon, MoonIcon, SpinnerIcon, StarIcon } from "@chakra-ui/icons"
 import NextLink from "next/link"
-import dynamic from "next/dynamic"
+import { AtSignIcon, InfoIcon, LinkIcon, MoonIcon, Search2Icon, StarIcon } from "@chakra-ui/icons"
+import { Grid as DataTableGrid } from "gridjs-react"
 import NextHead from "next/head"
 
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 
 export default function Component() {
@@ -72,7 +72,7 @@ export default function Component() {
   <VStack alignItems={`left`} sx={{"gap": 4}}>
   <Container>
   <HStack>
-  <SpinnerIcon sx={{"mr": 2, "color": "green"}}/>
+  <Image src={`/aurora2.ico`} sx={{"width": "50px", "height": "30px"}}/>
   <Text sx={{"fontSize": "25px", "fontWeight": "bolder", "fontFamily": "Open Sans,Sans-serif", "background": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "-webkit-background-clip": "text", "color": "transparent", "centerContent": true}}>
   {`Aurora`}
 </Text>
@@ -85,6 +85,10 @@ export default function Component() {
   <Link as={NextLink} href={`/myprofile`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 5, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
   <AtSignIcon sx={{"mr": 2}}/>
   {`My Profile`}
+</Link>
+  <Link as={NextLink} href={`/websearch`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
+  <Search2Icon sx={{"mr": 2}}/>
+  {`Search`}
 </Link>
   <Link as={NextLink} href={`/video`} sx={{"display": "inline-flex", "alignItems": "center", "py": 3, "px": 6, "border": "1px solid #eaeaea", "fontWeight": "semibold", "borderRadius": "full"}}>
   <LinkIcon sx={{"mr": 2}}/>
@@ -103,34 +107,32 @@ export default function Component() {
   <Container sx={{"height": "200px"}}/>
 </VStack>
 </Box>
-  <Box sx={{"h": "100%"}}>
+  <Box sx={{"borderX": "3px solid #ededed", "h": "100%"}}>
   <HStack justify={`space-between`} sx={{"p": 4, "borderBottom": "3px solid #ededed"}}>
   <Heading size={`md`}>
   {`Search`}
 </Heading>
-  <Input onBlur={(_e0) => addEvents([Event("state.home_state.set_video_search", {value:_e0.target.value})], (_e0), {})} placeholder={`Search..`} type={`text`}/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.search_video", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Input onBlur={(_e0) => addEvents([Event("state.home_state.set_web_search", {value:_e0.target.value})], (_e0), {})} placeholder={`Search..`} type={`text`}/>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.search_all", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
   {`Search`}
 </Button>
 </HStack>
-  <ReactPlayer controls={true} loop={true} playing={true} sx={{"maxWidth": "700px", "maxHeight": "auto"}} url={state.home_state.show_video}/>
+  <DataTableGrid columns={state.home_state.search_df.columns} data={state.home_state.search_df.data} sx={{"fontSize": "8px"}}/>
 </Box>
-  <Grid sx={{"gridTemplateRows": "1fr 9fr", "alignItems": "start", "gap": 4, "h": "100%", "py": 4}}>
   <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
-  <Container>
+  <Container sx={{"alignItems": "start", "height": "auto", "marginBottom": "5px"}}>
   <Button onClick={(_e) => addEvents([Event("state.home_state.google_crawler", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
   {`실시간 검색어`}
 </Button>
 </Container>
-</VStack>
   <VStack>
-  {Object.entries(state.home_state.web_trend).map((rsqxzses, nbuetpfg) => (
-  <VStack key={nbuetpfg} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
+  {Object.entries(state.home_state.web_trend).map((pgarmkib, duuwidwh) => (
+  <VStack key={duuwidwh} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
   <Box>
   <Container sx={{"align": "start", "width": "300px", "fontWeight": "bold"}}>
   <Container>
   <Text>
-  {`${rsqxzses[0]}위 : ${rsqxzses[1]}`}
+  {`${pgarmkib[0]}위 : ${pgarmkib[1]}`}
 </Text>
 </Container>
 </Container>
@@ -138,7 +140,7 @@ export default function Component() {
 </VStack>
 ))}
 </VStack>
-</Grid>
+</VStack>
 </Grid>
 </Container>
   <NextHead>

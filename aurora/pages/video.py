@@ -54,6 +54,20 @@ def tab_button3(name, href):
 def tab_button4(name, href):
     """A tab switcher button."""
     return rx.link(
+        rx.icon(tag="link", mr=2),  # 별 모양 아이콘
+        name,  # 버튼 텍스트
+        display="inline-flex",
+        align_items="center",
+        py=3,
+        px=6,
+        href=href,  # 버튼 클릭 시 이동할 경로
+        border="1px solid #eaeaea",
+        font_weight="semibold",
+        border_radius="full",
+    )
+def tab_button5(name, href):
+    """A tab switcher button."""
+    return rx.link(
         rx.icon(tag="info", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
         display="inline-flex",
@@ -73,7 +87,7 @@ def tabs():
         rx.vstack(
             rx.container(
                 rx.hstack(
-                    rx.icon(tag="spinner", mr=2, color='green'),  # 달 모양 아이콘
+                    rx.image(src="/aurora2.ico", width="50px", height="30px"),  # 오로라 아이콘
                     rx.text(
                         "Aurora", 
                         style={
@@ -91,7 +105,8 @@ def tabs():
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile", "/myprofile"),
             tab_button3("Search", "/websearch"),
-            tab_button4("Maps", "/maps"),
+            tab_button4("Video", "/video"),
+            tab_button5("Maps", "/maps"),
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
