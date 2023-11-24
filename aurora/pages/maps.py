@@ -134,8 +134,8 @@ def feed_header(HomeState):
             background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
             box_sizing="border-box",
             color="white",
-            opacity="0.6",
-            _hover={"opacity": 1},
+            opacity=1,
+            _hover={"opacity": 0.6},
         ),
         rx.button(
             "clear",
@@ -145,8 +145,8 @@ def feed_header(HomeState):
             background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
             box_sizing="border-box",
             color="white",
-            opacity="0.6",
-            _hover={"opacity": 1},
+            opacity=1,
+            _hover={"opacity": 0.6},
         ),
         justify="space-between",
         p=4,
@@ -163,7 +163,6 @@ def feed(HomeState):
         feed_header(HomeState),
         rx.container(height='10px'),
         rx.html(HomeState.map_iframe),
-        border_x="3px solid #ededed",
         h="100%",
     )
 

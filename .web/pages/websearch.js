@@ -107,13 +107,13 @@ export default function Component() {
   <Container sx={{"height": "200px"}}/>
 </VStack>
 </Box>
-  <Box sx={{"borderX": "3px solid #ededed", "h": "100%"}}>
+  <Box sx={{"h": "100%"}}>
   <HStack justify={`space-between`} sx={{"p": 4, "borderBottom": "3px solid #ededed"}}>
   <Heading size={`md`}>
   {`Search`}
 </Heading>
   <Input onBlur={(_e0) => addEvents([Event("state.home_state.set_web_search", {value:_e0.target.value})], (_e0), {})} placeholder={`Search..`} type={`text`}/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.search_all", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.search_all", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": 1, "_hover": {"opacity": 0.6}}}>
   {`Search`}
 </Button>
 </HStack>
@@ -121,18 +121,18 @@ export default function Component() {
 </Box>
   <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
   <Container sx={{"alignItems": "start", "height": "auto", "marginBottom": "5px"}}>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.google_crawler", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.google_crawler", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": 1, "_hover": {"opacity": 0.6}}}>
   {`실시간 검색어`}
 </Button>
 </Container>
   <VStack>
-  {Object.entries(state.home_state.web_trend).map((rxyvuhaj, rekrwivp) => (
-  <VStack key={rekrwivp} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
+  {Object.entries(state.home_state.web_trend).map((oyulqhvm, capafmjz) => (
+  <VStack key={capafmjz} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
   <Box>
   <Container sx={{"align": "start", "width": "300px", "fontWeight": "bold"}}>
   <Container>
   <Text>
-  {`${rxyvuhaj[0]}위 : ${rxyvuhaj[1]}`}
+  {`${oyulqhvm[0]}위 : ${oyulqhvm[1]}`}
 </Text>
 </Container>
 </Container>

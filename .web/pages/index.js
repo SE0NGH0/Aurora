@@ -120,19 +120,19 @@ export default function Component() {
   <DebounceInput debounceTimeout={50} element={Textarea} onChange={(_e0) => addEvents([Event("state.home_state.set_tweet", {value:_e0.target.value})], (_e0), {})} placeholder={`What's happening?`} sx={{"w": "600px", "border": 2, "resize": "none", "py": 4, "px": 0, "_focus": {"border": 0, "outline": 0, "boxShadow": "none"}}} value={state.home_state.tweet}/>
 </HStack>
   <HStack justifyContent={`flex-end`} sx={{"borderTop": "1px solid #ededed", "px": 4, "py": 2}}>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.handle_file_selection", {})], (_e), {})} sx={{"margin": "0", "padding": "10px", "border": "none", "_hover": {"bg": "darkgray"}, "_active": {"bg": "gray"}, "color": "white", "bg": "lightgray"}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.handle_file_selection", {})], (_e), {})} sx={{"margin": "0", "padding": "10px", "border": "none", "color": "white", "bg": "gray", "opacity": 1, "_hover": {"opacity": 0.6}}}>
   {`Select File`}
 </Button>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.post_tweet", {})], (_e), {})} sx={{"margin-left": "auto", "borderRadius": "1em", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.post_tweet", {})], (_e), {})} sx={{"margin-left": "auto", "borderRadius": "1em", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": 1, "_hover": {"opacity": 0.6}}}>
   {`Tweet`}
 </Button>
 </HStack>
   <SimpleGrid columns={[2]} spacing={`5px`}>
-  {state.home_state.img.map((lgcullnd, nhjtcxuw) => (
-  <VStack key={nhjtcxuw}>
-  <Image src={lgcullnd}/>
+  {state.home_state.img.map((wgrswjwi, peqbnzpo) => (
+  <VStack key={peqbnzpo}>
+  <Image src={wgrswjwi}/>
   <Text>
-  {lgcullnd}
+  {wgrswjwi}
 </Text>
 </VStack>
 ))}
@@ -141,23 +141,23 @@ export default function Component() {
   <Fragment>
   {isTrue(state.home_state.tweets) ? (
   <Fragment>
-  {state.home_state.tweets.map((hobnqxqe, tsjjstrz) => (
-  <Grid key={tsjjstrz} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
+  {state.home_state.tweets.map((lotrdfeg, fjzzsurd) => (
+  <Grid key={fjzzsurd} sx={{"gridTemplateColumns": "1fr 5fr", "py": 4, "gap": 1, "borderBottom": "1px solid #ededed"}}>
   <VStack>
-  <Avatar name={hobnqxqe.author} size={`sm`}/>
+  <Avatar name={lotrdfeg.author} size={`sm`}/>
 </VStack>
   <Box>
   <Text sx={{"fontWeight": "bold"}}>
-  {("@" + hobnqxqe.author)}
+  {("@" + lotrdfeg.author)}
 </Text>
   <Text sx={{"width": "100%"}}>
-  {hobnqxqe.content}
+  {lotrdfeg.content}
 </Text>
   <Fragment>
-  {isTrue(hobnqxqe.image_content) ? (
+  {isTrue(lotrdfeg.image_content) ? (
   <Fragment>
-  {hobnqxqe.image_content.split(", ").map((gwekgiqq, auatekvx) => (
-  <Image alt={`tweet image`} key={auatekvx} src={`/${gwekgiqq}`}/>
+  {lotrdfeg.image_content.split(", ").map((xepubipu, wgxqojda) => (
+  <Image alt={`tweet image`} key={wgxqojda} src={`/${xepubipu}`}/>
 ))}
 </Fragment>
 ) : (
@@ -186,15 +186,15 @@ export default function Component() {
 </Box>
   <VStack alignItems={`start`} sx={{"gap": 4, "h": "100%", "py": 4}}>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_friend", {value:_e0.target.value})], (_e0), {})} placeholder={`Search users..`} sx={{"width": "100%"}} type={`text`}/>
-  {state.home_state.search_users.map((svbeouvl, tsavtffb) => (
-  <VStack key={tsavtffb} sx={{"py": 2, "width": "100%"}}>
+  {state.home_state.search_users.map((mbmrkmxv, jwfxamlu) => (
+  <VStack key={jwfxamlu} sx={{"py": 2, "width": "100%"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={svbeouvl.username} size={`sm`}/>
+  <Avatar name={mbmrkmxv.username} size={`sm`}/>
   <Text>
-  {svbeouvl.username}
+  {mbmrkmxv.username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:svbeouvl.username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.follow_user", {username:mbmrkmxv.username})], (_e), {})}>
   <AddIcon/>
 </Button>
 </HStack>
@@ -204,12 +204,12 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Followers`}
 </Heading>
-  {state.home_state.followers.map((pqzeqorm, oelgypcc) => (
-  <VStack key={oelgypcc} sx={{"padding": "1em"}}>
+  {state.home_state.followers.map((sinpbftk, ctupeqhu) => (
+  <VStack key={ctupeqhu} sx={{"padding": "1em"}}>
   <HStack sx={{"width": "100%"}}>
-  <Avatar name={pqzeqorm.follower_username} size={`sm`}/>
+  <Avatar name={sinpbftk.follower_username} size={`sm`}/>
   <Text>
-  {pqzeqorm.follower_username}
+  {sinpbftk.follower_username}
 </Text>
 </HStack>
 </VStack>
@@ -219,15 +219,15 @@ export default function Component() {
   <Heading size={`sm`}>
   {`Following`}
 </Heading>
-  {state.home_state.following.map((wmuvujjh, qujsboiq) => (
-  <VStack key={qujsboiq} sx={{"padding": "1em"}}>
+  {state.home_state.following.map((zvbatdda, jpswrypf) => (
+  <VStack key={jpswrypf} sx={{"padding": "1em"}}>
   <HStack>
-  <Avatar name={wmuvujjh.followed_username} size={`sm`}/>
+  <Avatar name={zvbatdda.followed_username} size={`sm`}/>
   <Text>
-  {wmuvujjh.followed_username}
+  {zvbatdda.followed_username}
 </Text>
   <Spacer/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:wmuvujjh.followed_username})], (_e), {})}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.unfollow_user", {username:zvbatdda.followed_username})], (_e), {})}>
   <MinusIcon/>
 </Button>
 </HStack>

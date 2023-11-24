@@ -105,16 +105,16 @@ export default function Component() {
   <Container sx={{"height": "200px"}}/>
 </VStack>
 </Box>
-  <Box sx={{"borderX": "3px solid #ededed", "h": "100%"}}>
+  <Box sx={{"h": "100%"}}>
   <HStack justify={`space-between`} sx={{"p": 4, "borderBottom": "3px solid #ededed"}}>
   <Heading size={`md`}>
   {`Maps`}
 </Heading>
   <Input onChange={(_e0) => addEvents([Event("state.home_state.set_tag_search", {value:_e0.target.value})], (_e0), {})} placeholder={`Search tags..`} type={`text`}/>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.map_search", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.map_search", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": 1, "_hover": {"opacity": 0.6}}}>
   {`Search`}
 </Button>
-  <Button onClick={(_e) => addEvents([Event("state.home_state.map_clear", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": "0.6", "_hover": {"opacity": 1}}}>
+  <Button onClick={(_e) => addEvents([Event("state.home_state.map_clear", {})], (_e), {})} sx={{"borderRadius": "1em", "boxShadow": "rgba(151, 65, 252, 0.8) 0 15px 30px -10px", "backgroundImage": "-webkit-linear-gradient(-45deg, #77e67d, #3c8552)", "boxSizing": "border-box", "color": "white", "opacity": 1, "_hover": {"opacity": 0.6}}}>
   {`clear`}
 </Button>
 </HStack>

@@ -149,8 +149,8 @@ def sidebar(HomeState):
                 background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                 box_sizing="border-box",
                 color="white",
-                opacity="0.6",
-                _hover={"opacity": 1},
+                opacity=1,
+                _hover={"opacity": 0.6},
             ),
             align_items="start",
             height='auto',
@@ -175,8 +175,7 @@ def sidebar(HomeState):
 
 
 # 피드의 헤더
-def feed_header(HomeState):
-    
+def feed_header(HomeState):  
     """The header of the feed."""
     return rx.hstack(
         rx.heading("Search", size="md"),  # 피드의 제목
@@ -189,8 +188,8 @@ def feed_header(HomeState):
             background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
             box_sizing="border-box",
             color="white",
-            opacity="0.6",
-            _hover={"opacity": 1},
+            opacity=1,
+            _hover={"opacity": 0.6},
         ),
         justify="space-between",
         p=4,
@@ -207,7 +206,6 @@ def feed(HomeState):
             data=HomeState.search_df,
             font_size = '8px',
         ),
-        border_x="3px solid #ededed",
         h="100%",
     )
 

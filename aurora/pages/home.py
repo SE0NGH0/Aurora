@@ -224,19 +224,15 @@ def composer(HomeState):
              rx.button(
                 "Select File",
                 color="white",  # Text color
-                bg="lightgray",  # Default background color
+                bg="gray",  # Default background color
                 on_click=HomeState.handle_file_selection,
+                opacity= 1,
+                _hover={"opacity": 0.6},
                 style={
                     "margin": "0",
                     "padding": "10px",
                     "border": "none",  # Remove border
-                    "_hover": {
-                        "bg": "darkgray",  # Background color on hover
-                    },
-                    "_active": {
-                        "bg": "gray",  # Background color on click
-                    },
-                }
+                },
             ),
             rx.button(
                 "Tweet",
@@ -245,8 +241,8 @@ def composer(HomeState):
                 background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                 box_sizing="border-box",
                 color="white",
-                opacity="0.6",
-                _hover={"opacity": 1},
+                opacity= 1,
+                _hover={"opacity": 0.6},
                 style={"margin-left": "auto"},  # Align to the right
             ),  # 트윗을 게시하는 버튼
             justify_content="flex-end",
