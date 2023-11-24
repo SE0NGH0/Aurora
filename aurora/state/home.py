@@ -1,7 +1,7 @@
 """The state for the home page."""
 from datetime import datetime
 import reflex as rx
-from .base import Follows, State, Tweet, User
+from .base import Follows, State, Tweet, User, Status_message
 import os,json
 import tkinter as tk
 from tkinter import filedialog
@@ -44,7 +44,9 @@ class HomeState(State):
     web_trend :dict
     web_search :str
     Trash_Link = ["kin", "dcinside", "fmkorea", "ruliweb", "theqoo", "clien", "mlbpark", "instiz", "todayhumor"] 
-    
+    status_message: str
+    status_messages: list[str] = []
+
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
         root = tk.Tk()
@@ -127,6 +129,22 @@ class HomeState(State):
                 )
             else:
                 self.tweets = session.query(Tweet).all()[::-1]
+
+    def post_status_message(self):
+        with rx.session() as session:
+            status_message = Status_message(
+                content=self.status_message,
+            )
+            session.add(status_message)
+            session.commit()
+            self.status_message = ""
+            
+        return self.get_status_messages()
+
+    def get_status_messages(self):
+        """Get all status messages from the database."""
+        with rx.session() as session:
+            self.status_messages = session.query(Status_message).all()[::-1]
 
     def set_search(self, search):
         """Set the search query."""

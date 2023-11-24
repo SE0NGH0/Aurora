@@ -205,8 +205,8 @@ def composer(HomeState):
     """The composer for new tweets."""
     return rx.grid(
         rx.hstack(
-            rx.container(width='10px'),
             rx.avatar(size="md"),  # 사용자의 아바타 이미지
+            rx.container(width='30px'),
             rx.text_area(
                 value=HomeState.tweet,
                 w="600px",
@@ -218,6 +218,7 @@ def composer(HomeState):
                 _focus={"border": 0, "outline": 0, "boxShadow": "none"},
                 on_change=HomeState.set_tweet,
             ),
+            margin_left = '30px',
         ),
         rx.hstack(
              rx.button(

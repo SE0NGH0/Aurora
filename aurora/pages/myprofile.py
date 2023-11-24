@@ -8,7 +8,6 @@ from aurora.state.base import User
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
-"""
 # 탭 버튼을 생성하는 함수
 def tab_button1(name, href):
     return rx.link(
@@ -260,7 +259,7 @@ def composer(HomeState):
             )
         )
     )
-"""
+
 # 개별 트윗을 표시하는 함수
 def edit_profile(status_message):
     return rx.box(
@@ -269,13 +268,13 @@ def edit_profile(status_message):
         gap=1,
         border_bottom="1px solid #ededed",
     ),
-"""
+
 # 피드 영역
 def feed(HomeState):
     return rx.box(
         my_name(AuthState),
         composer(HomeState),
-
+        """
         rx.cond(
             HomeState.status_messages,
             rx.foreach(
@@ -289,13 +288,12 @@ def feed(HomeState):
                 ),
             ),
         ),
+        """
     )
-"""
 # 마이 페이지
 def myprofile():
     """The home page."""
     return container(
-        """
         rx.grid(
             tabs(),
             feed(HomeState),
@@ -305,5 +303,4 @@ def myprofile():
             gap=4,
         ),
         max_width="1600px",
-        """
     )
