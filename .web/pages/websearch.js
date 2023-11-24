@@ -126,13 +126,13 @@ export default function Component() {
 </Button>
 </Container>
   <VStack>
-  {Object.entries(state.home_state.web_trend).map((adcaxgrl, fqkpuaic) => (
-  <VStack key={fqkpuaic} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
+  {Object.entries(state.home_state.web_trend).map((iidyzrde, ptaaccbn) => (
+  <VStack key={ptaaccbn} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
   <Box>
   <Container sx={{"align": "start", "width": "300px", "fontWeight": "bold"}}>
   <Container>
   <Text>
-  {`${adcaxgrl[0]}위 : ${adcaxgrl[1]}`}
+  {`${iidyzrde[0]}위 : ${iidyzrde[1]}`}
 </Text>
 </Container>
 </Container>
