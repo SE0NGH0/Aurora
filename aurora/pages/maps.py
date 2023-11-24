@@ -142,8 +142,8 @@ def feed_header(HomeState):
 def feed(HomeState):
     return rx.box(
         feed_header(HomeState),
+        rx.container(height='10px'),
         rx.html(HomeState.map_iframe),  # Add this line to include the map iframe
-        border_x="3px solid #ededed",
         h="100%",
     )
 

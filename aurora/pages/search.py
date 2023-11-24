@@ -28,7 +28,7 @@ def tab_button2(name, href):
         display="inline-flex",
         align_items="center",
         py=3,
-        px=6,
+        px=5,
         href=href,  # 버튼 클릭 시 이동할 경로
         border="1px solid #eaeaea",
         font_weight="semibold",

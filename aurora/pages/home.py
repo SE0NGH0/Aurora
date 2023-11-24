@@ -260,7 +260,6 @@ def composer(HomeState):
         border_bottom="3px solid #ededed",
     )
 
-
 # 개별 트윗을 표시하는 함수
 def tweet(tweet):
     """Display for an individual tweet in the feed."""
@@ -312,7 +311,6 @@ def feed(HomeState):
                 p=4,
             ),
         ),
-        border_x="3px solid #ededed",
         h="100%",
     )
 

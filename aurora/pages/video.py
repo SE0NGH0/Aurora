@@ -140,16 +140,17 @@ def feed_header(HomeState):
 def feed(HomeState):
     return rx.box(
         feed_header(HomeState),
-        rx.video(
-            url = HomeState.show_video,
-            max_width = '700px',
-            max_height = 'auto',
-            playing = True,
-            loop = True,
-        ),
-        center_content=True,
-        border_x="3px solid #ededed",
+        rx.container(height='10px'),
+        rx.vstack(
+            rx.video(
+                url = HomeState.show_video,
+                max_width = '700px',
+                max_height = 'auto',
+                playing = True,
+                loop = True,
+            ),
         h="100%",
+        ),
     )
 
 # 홈 페이지
