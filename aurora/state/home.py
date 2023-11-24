@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 import folium
 from folium.plugins import MiniMap
+import time
 
 # Naver_client_id = Db_7CrOsJ5oCDAJhgcEd
 # Naver_client_secret = 4Z7D86omvi
@@ -48,9 +49,7 @@ class HomeState(State):
     map_iframe:str = f'<iframe src="{map_html}" width="100%" height="600"></iframe>'
     map_search_check:bool=False
 
-    today = datetime.today().strftime("%Y%m%d")
-    query = "뇌진탕 | 외상성 뇌손상 | 두부외상"
-    wanted_row = 100
+    video_search:str=""
     
     def handle_file_selection(self):
         # 파일 선택 대화상자 열기
@@ -331,4 +330,12 @@ class HomeState(State):
         self.locations=[]
         self.tag_search=""
 
+    def search_video(self):
+        if self.video_search == "":
+            return rx.window_alert('Enter the link to the video..')
+        self.video_search = self.video_search
+        
     
+    @rx.var
+    def show_video(self) -> str:
+        return self.video_search
