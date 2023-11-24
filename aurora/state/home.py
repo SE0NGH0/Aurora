@@ -238,7 +238,7 @@ class HomeState(State):
 
     def kakao_api(self): 
         key=''
-        with open('key.json','r')as f:
+        with open('kakaoapikey.json','r')as f:
             key = json.load(f)
         self.REST_API_KEY = key['key']
         
