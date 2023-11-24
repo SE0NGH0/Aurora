@@ -259,7 +259,32 @@ def composer(HomeState):
             )
         )
     )
+# 개별 트윗을 표시하는 함수
+def tweet(tweet):
+    """Display for an individual tweet in the feed."""
+    image_tags = rx.cond(
+        tweet.image_content,
+        rx.foreach(
+            tweet.image_content.split(", "),
+            lambda image: rx.image(src=f"/{image}", alt="tweet image")
+        ),
+        rx.box()  # 이미지가 없는 경우 빈 리스트를 반환합니다.
+    ),
 
+    return rx.grid(
+        rx.vstack(
+            rx.avatar(name=tweet.author, size="sm"),  # 트윗 작성자의 아바타 이미지
+        ),
+        rx.box(
+            rx.text("@" + tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
+            rx.text(tweet.content, width="100%"),  # 트윗 내용
+            *image_tags
+        ),
+        grid_template_columns="1fr 5fr",
+        py=4,
+        gap=1,
+        border_bottom="1px solid #ededed",
+    )
 # 개별 트윗을 표시하는 함수
 def edit_profile(status_message):
     return rx.box(
@@ -287,8 +312,28 @@ def feed(HomeState):
                     on_click=HomeState.get_status_messages,
                 ),
             ),
+            border_bottom="3px solid #ededed",
         ),
-        """
+        """,
+        rx.container(height='10px'),
+        rx.cond(
+            HomeState.tweets,
+            rx.foreach(
+                HomeState.tweets,
+                tweet
+            ),
+            rx.vstack(
+                rx.button(
+                    rx.icon(
+                        tag="repeat",
+                        mr=1,
+                    ),
+                    rx.text("My Posts"),
+                    on_click=HomeState.get_tweets,
+                ),  # 트윗을 불러오는 버튼
+                p=4,
+            ),
+        ),
     )
 # 마이 페이지
 def myprofile():
