@@ -105,15 +105,20 @@ def tabs():
 
 def trend(key: str, value: str):
     return rx.vstack(
-        rx.container(
+        rx.box(
             rx.container(
-                rx.text(f'{key}위 : {value}'),
+                rx.container(
+                    rx.text(f'{key}위 : {value}'),
+                ),
+                align='start',
+                width='300px',
+                font_weight="bold",
             ),
-            align='start',
-            width='250px',
-            font_weight="bold",
         ),
         align='start',
+        border='1px solid black',  # 테두리 스타일 지정
+        border_radius='12px',  # 동그란 테두리를 위한 반지름 값 지정
+        padding='5px',  # 테두리와 내용 사이의 여백 지정
     )
 
 def sidebar(HomeState):
@@ -204,5 +209,5 @@ def websearch():
             h="100vh",
             gap=4,
         ),
-        max_width="1300px",
+        max_width="1600px",
     )

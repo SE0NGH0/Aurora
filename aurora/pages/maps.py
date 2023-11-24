@@ -158,5 +158,5 @@ def maps():
             h="100vh",
             gap=4,
         ),
-        max_width="1300px",
+        max_width="1600px",
     )

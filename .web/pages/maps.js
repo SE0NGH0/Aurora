@@ -64,7 +64,7 @@ export default function Component() {
   <Fragment/>
 )}
 </Fragment>
-  <Container sx={{"maxWidth": "1300px"}}>
+  <Container sx={{"maxWidth": "1600px"}}>
   <Grid sx={{"gridTemplateColumns": "1fr 4fr 1fr", "h": "100vh", "gap": 4}}>
   <Box sx={{"py": 4}}>
   <VStack alignItems={`left`} sx={{"gap": 4}}>

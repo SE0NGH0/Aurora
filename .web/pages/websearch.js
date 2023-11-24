@@ -66,7 +66,7 @@ export default function Component() {
   <Fragment/>
 )}
 </Fragment>
-  <Container sx={{"maxWidth": "1300px"}}>
+  <Container sx={{"maxWidth": "1600px"}}>
   <Grid sx={{"gridTemplateColumns": "1fr 4fr 1fr", "h": "100vh", "gap": 4}}>
   <Box sx={{"py": 4}}>
   <VStack alignItems={`left`} sx={{"gap": 4}}>
@@ -124,15 +124,17 @@ export default function Component() {
 </Container>
 </VStack>
   <VStack>
-  {Object.entries(state.home_state.web_trend).map((bqqvxuwg, ebaljbny) => (
-  <VStack key={ebaljbny} sx={{"align": "start"}}>
-  <Container sx={{"align": "start", "width": "250px", "fontWeight": "bold"}}>
+  {Object.entries(state.home_state.web_trend).map((ypsiybqh, npaglqnf) => (
+  <VStack key={npaglqnf} sx={{"align": "start", "border": "1px solid black", "borderRadius": "12px", "padding": "5px"}}>
+  <Box>
+  <Container sx={{"align": "start", "width": "300px", "fontWeight": "bold"}}>
   <Container>
   <Text>
-  {`${bqqvxuwg[0]}위 : ${bqqvxuwg[1]}`}
+  {`${ypsiybqh[0]}위 : ${ypsiybqh[1]}`}
 </Text>
 </Container>
 </Container>
+</Box>
 </VStack>
 ))}
 </VStack>
