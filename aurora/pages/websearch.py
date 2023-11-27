@@ -115,10 +115,10 @@ def tabs():
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile","/myprofile"),
-            tab_button3("web search","/websearch"),
+            tab_button3("Web search","/websearch"),
+            tab_button4("Video","/video"),
             tab_button5("Maps","/maps"),
-            tab_button4("video","/video"),
-            tab_button6("ai chat","/aichat"),
+            tab_button6("Ai Chat","/aichat"),
             
             rx.button(
                 rx.icon(tag="moon"),
@@ -153,21 +153,21 @@ def sidebar(HomeState):
     HomeState.real_time_trend
     """The sidebar displayed on the right."""
     return rx.vstack(
+        rx.container(height='2px'),
         rx.container(
             rx.button(
                 '실시간 검색어',
                 on_click = HomeState.google_crawler,
                 border_radius="1em",
                 box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-                background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                 box_sizing="border-box",
                 color="white",
-                opacity="0.6",
-                _hover={"opacity": 1},
+                opacity=1,
+                _hover={"opacity": 0.6},
             ),
             align_items="start",
             height='auto',
-            py=4,
             margin_bottom='5px',
 
         ),
@@ -198,15 +198,15 @@ def feed_header(HomeState):
             on_click = HomeState.search_all,
             border_radius="1em",
             box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-            background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+            background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
             box_sizing="border-box",
             color="white",
-            opacity="0.6",
-            _hover={"opacity": 1},
+            opacity=1,
+            _hover={"opacity": 0.6},
         ),
         justify="space-between",
         p=4,
-        border_bottom="3px solid #ededed",
+        border_bottom="3px solid #000000",
     )
 
 # 피드 영역
@@ -214,11 +214,11 @@ def feed(HomeState):
     HomeState.search_table
     return rx.box(
         feed_header(HomeState),
+        rx.container(height='10px'),
         rx.data_table(
             data=HomeState.search_df,
             font_size = '8px',
         ),
-        border_x="3px solid #ededed",
         h="100%",
     )
 

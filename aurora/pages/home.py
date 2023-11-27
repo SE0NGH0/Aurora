@@ -116,10 +116,10 @@ def tabs():
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile","/myprofile"),
-            tab_button3("web search","/websearch"),
+            tab_button3("Web search","/websearch"),
+            tab_button4("Video","/video"),
             tab_button5("Maps","/maps"),
-            tab_button4("video","/video"),
-            tab_button6("ai chat","/aichat"),
+            tab_button6("Ai Chat","/aichat"),
             
             rx.button(
                 rx.icon(tag="moon"),
@@ -202,37 +202,41 @@ def composer(HomeState):
             ),
             rx.hstack(
                 rx.button(
-                    "Select File",
-                    border_radius="1em",
-                    box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-                    background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
-                    box_sizing="border-box",
-                    color="white",
-                    opacity="0.6",
-                    _hover={"opacity": 1},
+                     "Select File",
+                    color="white",  # Text color
+                    bg="gray",  # Default background color
                     on_click=HomeState.handle_file_selection,
+                    style={
+                        "margin": "0",
+                        "padding": "10px",
+                        "border": "none",  # Remove border
+                    },
+                    opacity=1,
+                    _hover={"opacity": 0.6},
                 ),
                 rx.button(
                     "Select Cancel",
                     on_click=HomeState.file_select_cancel,
-                    border_radius="1em",
-                    box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-                    background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
-                    box_sizing="border-box",
-                    color="white",
-                    opacity="0.6",
-                    _hover={"opacity": 1},
+                    color="white",  # Text color
+                    bg="gray",  # Default background color
+                    style={
+                        "margin": "0",
+                        "padding": "10px",
+                        "border": "none",  # Remove border
+                    },
+                    opacity=1,
+                    _hover={"opacity": 0.6},
                 ),
                 rx.button(
                     "Tweet",
                     on_click= HomeState.post_tweet,
                     border_radius="1em",
                     box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-                    background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                    background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                     box_sizing="border-box",
                     color="white",
-                    opacity="0.6",
-                    _hover={"opacity": 1},
+                    opacity=1,
+                    _hover={"opacity": 0.6},
                     style={"margin-left": "auto"},  # Align to the right
                 ),  # 트윗을 게시하는 버튼
                 justify_content="flex-end",
@@ -288,7 +292,7 @@ def tweet(tweet):
             ),
             py=4,
             gap=1,
-            border="3px solid #3498db",
+            border="3px solid #1fb84d",
             border_radius='10px',
             width='98%',
         ),

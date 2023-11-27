@@ -35,7 +35,7 @@ def login():
                         rx.text(
                             "Record your shining moments!",
                             style={
-                                'background': "-webkit-linear-gradient(-45deg, #e04a3f, #4e8be6)",
+                                'background': "-webkit-linear-gradient(-45deg, #3c8552, #77e67d)",
                                 'background_clip': "text",  # 텍스트에만 그라데이션 적용
                                 'color': "transparent",  # 텍스트 색상을 투명으로 설정
                                 'font_weight': "medium",
@@ -78,7 +78,7 @@ def login():
                     ), 
                     rx.text(
                         "Don't have an account yet?   ",
-                        rx.link("Sign up!", href="/signup", color="blue.500"),
+                        rx.link("Sign up!", href="/signup", color="green.500"),
                         color="gray.600",
                     ),
                     rx.container(height='30px') ,  
