@@ -272,7 +272,7 @@ def composer(HomeState):
             rx.hstack(
                 rx.hstack(
                     rx.button(
-                        "load",
+                        "Load",
                         on_click = HomeState.getprofile,
                         border_radius="1em",
                         box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
@@ -351,7 +351,7 @@ def composer(HomeState):
             ),
             rx.container(height='10px'),
             width='100%',
-            border='3px solid #eda239',
+            border='3px solid #000000',
             border_radius='20px',
         ),
         rx.container(height='10px'),
@@ -389,7 +389,7 @@ def tweet(tweet):
             ),
             py=4,
             gap=1,
-            border="3px solid #3498db",
+            border="3px solid #1fb84d",
             border_radius='10px',
             width='98%',
         ),
@@ -423,7 +423,6 @@ def feed(HomeState):
                 p=4,
             ),
         ),
-        border_x="3px solid #000000",
     )
 
 # 마이 페이지

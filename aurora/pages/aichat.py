@@ -166,7 +166,7 @@ def feed_header(HomeState):
             on_click = HomeState.clear_gpt,
             border_radius="1em",
             box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-            background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
+            bg="gray",
             box_sizing="border-box",
             color="white",
             opacity=1,

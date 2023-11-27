@@ -327,7 +327,6 @@ def feed(HomeState):
                 p=4,
             ),
         ),
-        border_x="3px solid #000000",
         h="100%",
     )
 

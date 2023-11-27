@@ -153,7 +153,6 @@ def sidebar(HomeState):
     HomeState.real_time_trend
     """The sidebar displayed on the right."""
     return rx.vstack(
-        rx.container(height='2px'),
         rx.container(
             rx.button(
                 '실시간 검색어',
@@ -182,6 +181,7 @@ def sidebar(HomeState):
         align_items="start",
         gap=4,
         h="100%",
+        py=4
     )
     
 
@@ -191,7 +191,7 @@ def feed_header(HomeState):
     
     """The header of the feed."""
     return rx.hstack(
-        rx.heading("Web Search", size="md"),  # 피드의 제목
+        rx.heading("Search", size="md"),  # 피드의 제목
         rx.input(on_blur=HomeState.set_web_search, placeholder="Search.."),  # 트윗 검색을 위한 입력 상자
         rx.button(
             "Search",
