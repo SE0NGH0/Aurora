@@ -154,7 +154,7 @@ def feed_header(HomeState):
             "Search",
             on_click = HomeState.search_video,
             border_radius="1em",
-            box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+            box_shadow="rgba(0, 255, 0, 0.8) 0 15px 15px -10px",
             background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
             box_sizing="border-box",
             color="white",
