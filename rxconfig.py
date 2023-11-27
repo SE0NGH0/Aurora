@@ -4,4 +4,5 @@ config = rx.Config(
     app_name="aurora",
     db_url="sqlite:///reflex.db",
     env=rx.Env.DEV,
+    host="0.0.0.0",
 )
