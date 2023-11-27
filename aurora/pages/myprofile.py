@@ -1,15 +1,15 @@
 # aurora.state.home 모듈에서 필요한 State 및 HomeState를 가져옵니다.
 import reflex as rx
-from aurora.state.base import State, Tweet, Status_message
+from aurora.state.base import State
 from aurora.state.home import HomeState
-from aurora.state.auth import AuthState
-from aurora.state.base import User
 
 # 컴포넌트를 가져옵니다.
 from ..components import container
 
+
 # 탭 버튼을 생성하는 함수
 def tab_button1(name, href):
+    """A tab switcher button."""
     return rx.link(
         rx.icon(tag="star", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -23,6 +23,7 @@ def tab_button1(name, href):
         border_radius="full",
     )
 def tab_button2(name, href):
+    """A tab switcher button."""
     return rx.link(
         rx.icon(tag="at_sign", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -36,6 +37,7 @@ def tab_button2(name, href):
         border_radius="full",
     )
 def tab_button3(name, href):
+    """A tab switcher button."""
     return rx.link(
         rx.icon(tag="search2", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -49,6 +51,7 @@ def tab_button3(name, href):
         border_radius="full",
     )
 def tab_button4(name, href):
+    """A tab switcher button."""
     return rx.link(
         rx.icon(tag="link", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -62,6 +65,7 @@ def tab_button4(name, href):
         border_radius="full",
     )
 def tab_button5(name, href):
+    """A tab switcher button."""
     return rx.link(
         rx.icon(tag="info", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
@@ -74,9 +78,23 @@ def tab_button5(name, href):
         font_weight="semibold",
         border_radius="full",
     )
-
+def tab_button6(name, href):
+    """A tab switcher button."""
+    return rx.link(
+        rx.icon(tag="question", mr=2),  # 별 모양 아이콘
+        name,  # 버튼 텍스트
+        display="inline-flex",
+        align_items="center",
+        py=3,
+        px=6,
+        href=href,  # 버튼 클릭 시 이동할 경로
+        border="1px solid #eaeaea",
+        font_weight="semibold",
+        border_radius="full",
+    )
 # 왼쪽에 표시되는 탭 스위처
 def tabs():
+    """The tab switcher displayed on the left."""
     return rx.box(
         rx.vstack(
             rx.container(
@@ -97,10 +115,12 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("My Profile", "/myprofile"),
-            tab_button3("Search", "/websearch"),
-            tab_button4("Video", "/video"),
-            tab_button5("Maps", "/maps"),
+            tab_button2("My Profile","/myprofile"),
+            tab_button3("web search","/websearch"),
+            tab_button5("Maps","/maps"),
+            tab_button4("video","/video"),
+            tab_button6("ai chat","/aichat"),
+            
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
@@ -115,6 +135,7 @@ def tabs():
 
 # 오른쪽에 표시되는 사이드바
 def sidebar(HomeState):
+    """The sidebar displayed on the right."""
     return rx.box(
         rx.vstack(
             rx.container(height='8px'),
@@ -212,54 +233,134 @@ def sidebar(HomeState):
         )
     )
 
-def my_name(AuthState):
-    return rx.grid(
-        rx.container(height='16px'),
-        rx.button("Edit Profile", on_click=HomeState.change),
-        rx.hstack(
-            rx.avatar(size="md"),  # 사용자의 아바타 이미지
-            rx.text(AuthState.username, size = "md", fontSize = "18px", fontWeight = "bold"),    
-            p=4,  
-        ),
+# 피드의 헤더
+def feed_header(HomeState):
+    """The header of the feed."""
+    return rx.hstack(
+        rx.heading("Story", size="md"),  # 피드의 제목
+        rx.input(on_change=HomeState.set_search, placeholder="Search"),  # 트윗 검색을 위한 입력 상자
+        justify="space-between",
+        p=4,
+        border_bottom="3px solid #000000",
     )
 
 def composer(HomeState):
-    return rx.grid(
-        rx.box(
-            rx.modal(
-                rx.modal_overlay(
-                    rx.modal_content(
-                        rx.modal_header("Edit Profile"),
-                        rx.modal_body(
-                            rx.text_area(
-                                value=HomeState.status_message,
-                                w="600px",
-                                border=2,
-                                placeholder="상태 메세지",  # 트윗을 작성하는 입력 상자
-                                resize="none",
-                                py=4,
-                                px=0,
-                                _focus={"border": 0, "outline": 0, "boxShadow": "none"},
-                                on_change=HomeState.set_status_message,
+    HomeState.setting_user_id
+    HomeState.syn_user_name
+    HomeState.syn_user_status_message
+    HomeState.syn_user_account_status
+    HomeState.getprofile
+    return rx.vstack(
+        rx.container(height='10px'),
+        rx.vstack(
+            rx.hstack(
+                rx.vstack(
+                    rx.container(height='10px'),
+                    rx.avatar(size="xl"),  # 사용자의 아바타 이미지
+                ),
+                rx.vstack(
+                    rx.text(HomeState.user.username, size = "md", fontSize = "30px", fontWeight = "bold"),
+                    rx.text(HomeState.users_name, fontSize = "20px", fontweight='bold'),
+                    rx.text(HomeState.users_status_message, fontSize = '15px'),
+                    align_items='start',
+                ),
+                p=4,
+                width='100%',
+                margin_left='5px',
+                align_items='start',
+            ),
+            rx.hstack(
+                rx.hstack(
+                    rx.button(
+                        "load",
+                        on_click = HomeState.getprofile,
+                        border_radius="1em",
+                        box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+                        background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                        box_sizing="border-box",
+                        color="white",
+                        opacity="0.6",
+                        _hover={"opacity": 1},
+                    ),
+                    rx.button(
+                        "Edit Profile",
+                        on_click = HomeState.change1,
+                        border_radius="1em",
+                        box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+                        background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                        box_sizing="border-box",
+                        color="white",
+                        opacity="0.6",
+                        _hover={"opacity": 1},
+                    ),
+                    rx.modal(
+                        rx.modal_overlay(
+                            rx.modal_content(
+                                rx.modal_header("Edit Profile"),
+                                rx.modal_body(
+                                    rx.vstack(
+                                        rx.hstack(
+                                            rx.vstack(
+                                                rx.text('Nickname '),
+                                                rx.container(height='3px'),
+                                                rx.text('Message '),
+                                                align_items='start',
+                                            ),
+                                            rx.vstack(
+                                                rx.input(on_change=HomeState.set_edit_user_name, placeholder='write nickname'),
+                                                rx.input(on_change=HomeState.set_edit_user_status_message, placeholder='write status_message'),
+                                                align_items='start',
+                                            ),
+                                            width='100%',
+                                        ),
+                                        rx.hstack(
+                                            rx.text(
+                                                'private account'
+                                            ),
+                                            rx.switch(
+                                                is_checked=HomeState.checked,
+                                                on_change=HomeState.change_check,
+                                                color_scheme="blue",
+                                            ),
+                                            justify_content='flex-end',
+                                        ),
+                                        align_items='start',
+                                    ),
+                                ),
+                                rx.modal_footer(
+                                    rx.button(
+                                        'Confirm',
+                                        on_click=HomeState.change,
+                                        border_radius="1em",
+                                        box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
+                                        background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                                        box_sizing="border-box",
+                                        color="white",
+                                        opacity="0.6",
+                                        _hover={"opacity": 1},
+                                    )
+                                )
                             ),
                         ),
-                        rx.modal_footer(
-                            rx.hstack(
-                                rx.button(
-                                    "Confirm", on_click=HomeState.post_status_message,
-                                ),
-                                rx.button(
-                                    "Close", on_click=HomeState.change
-                                ),
-                            ),
-                        ),
+                        is_open=HomeState.show,
                     )
                 ),
-                is_open=HomeState.show,
-            )
-        )
+                rx.container(width='10px'),
+                justify_content='flex-end',
+                width='100%',
+            ),
+            rx.container(height='10px'),
+            width='100%',
+            border='3px solid #eda239',
+            border_radius='20px',
+        ),
+        rx.container(height='10px'),
+        width ='97%',
+        margin_left='10px',
     )
-# 개별 트윗을 표시하는 함수
+    
+    
+
 def tweet(tweet):
     """Display for an individual tweet in the feed."""
     image_tags = rx.cond(
@@ -271,55 +372,43 @@ def tweet(tweet):
         rx.box()  # 이미지가 없는 경우 빈 리스트를 반환합니다.
     ),
 
-    return rx.grid(
-        rx.vstack(
-            rx.avatar(name=tweet.author, size="sm"),  # 트윗 작성자의 아바타 이미지
+    return rx.vstack(
+        rx.hstack(
+            rx.container(width='5px'),
+            rx.vstack(
+                rx.avatar(name=tweet.author, size="md"),  # 트윗 작성자의 아바타 이미지
+            ),
+            rx.box(
+                rx.hstack(
+                    rx.text("@" + tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
+                    rx.text("["+ tweet.created_at +"]"),
+                ),
+                rx.text(tweet.content, width="100%"),  # 트윗 내용
+                *image_tags,
+                width = '100%',
+            ),
+            py=4,
+            gap=1,
+            border="3px solid #3498db",
+            border_radius='10px',
+            width='98%',
         ),
-        rx.box(
-            rx.text("@" + tweet.author, font_weight="bold"),  # 트윗 작성자의 사용자 이름
-            rx.text(tweet.content, width="100%"),  # 트윗 내용
-            *image_tags
-        ),
-        grid_template_columns="1fr 5fr",
-        py=4,
-        gap=1,
-        border_bottom="1px solid #ededed",
+        rx.container(height='5px'),
+        margin_left='15px',
+        align_items='start',
+        width='97%',
     )
-# 개별 트윗을 표시하는 함수
-def edit_profile(status_message):
-    return rx.box(
-        rx.text(status_message.content, width="100%"),  # 트윗 내용
-        py=4,
-        gap=1,
-        border_bottom="1px solid #ededed",
-    ),
 
 # 피드 영역
 def feed(HomeState):
+    """The feed."""
     return rx.box(
-        my_name(AuthState),
+        feed_header(HomeState),
         composer(HomeState),
-        """
         rx.cond(
-            HomeState.status_messages,
+            HomeState.user_tweets,
             rx.foreach(
-                HomeState.status_messages,
-                edit_profile
-            ),
-            rx.hstack(
-                rx.button(
-                    rx.text("..."), 
-                    on_click=HomeState.get_status_messages,
-                ),
-            ),
-            border_bottom="3px solid #ededed",
-        ),
-        """,
-        rx.container(height='10px'),
-        rx.cond(
-            HomeState.tweets,
-            rx.foreach(
-                HomeState.tweets,
+                HomeState.user_tweets,
                 tweet
             ),
             rx.vstack(
@@ -328,16 +417,18 @@ def feed(HomeState):
                         tag="repeat",
                         mr=1,
                     ),
-                    rx.text("My Posts"),
-                    on_click=HomeState.get_user_tweets,
+                    rx.text("Click to load tweets"),
+                    on_click=HomeState.get_user_tweet,
                 ),  # 트윗을 불러오는 버튼
                 p=4,
             ),
         ),
+        border_x="3px solid #000000",
     )
+
 # 마이 페이지
 def myprofile():
-    """The home page."""
+    State.check_login
     return container(
         rx.grid(
             tabs(),

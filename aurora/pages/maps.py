@@ -1,6 +1,6 @@
 # aurora.state.home 모듈에서 필요한 State 및 HomeState를 가져옵니다.
 import reflex as rx
-from aurora.state.base import State
+from aurora.state.base import State, User
 from aurora.state.home import HomeState
 
 # 컴포넌트를 가져옵니다.
@@ -79,6 +79,20 @@ def tab_button5(name, href):
         font_weight="semibold",
         border_radius="full",
     )
+def tab_button6(name, href):
+    """A tab switcher button."""
+    return rx.link(
+        rx.icon(tag="question", mr=2),  # 별 모양 아이콘
+        name,  # 버튼 텍스트
+        display="inline-flex",
+        align_items="center",
+        py=3,
+        px=6,
+        href=href,  # 버튼 클릭 시 이동할 경로
+        border="1px solid #eaeaea",
+        font_weight="semibold",
+        border_radius="full",
+    )
 # 왼쪽에 표시되는 탭 스위처
 def tabs():
     """The tab switcher displayed on the left."""
@@ -102,10 +116,12 @@ def tabs():
                 ),
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
-            tab_button2("My Profile", "/myprofile"),
-            tab_button3("Search", "/websearch"),
-            tab_button4("Video", "/video"),
-            tab_button5("Maps", "/maps"),
+            tab_button2("My Profile","/myprofile"),
+            tab_button3("web search","/websearch"),
+            tab_button5("Maps","/maps"),
+            tab_button4("video","/video"),
+            tab_button6("ai chat","/aichat"),
+            
             rx.button(
                 rx.icon(tag="moon"),
                 on_click=rx.toggle_color_mode,
@@ -118,6 +134,13 @@ def tabs():
         py=4,
     )
 
+def sidebar(HomeState):
+    return rx.vstack(
+        align_items="start",
+        gap=4,
+        h="100%",
+        py=4,
+    )
 
 # 피드의 헤더
 def feed_header(HomeState):
@@ -125,28 +148,28 @@ def feed_header(HomeState):
     """The header of the feed."""
     return rx.hstack(
         rx.heading("Maps", size="md"),  # 피드의 제목
-        rx.input(on_change=HomeState.set_tag_search, placeholder="Search tags.."),  # 트윗 검색을 위한 입력 상자
+        rx.input(on_blur=HomeState.set_tag_search, placeholder="Search tags"),  # 트윗 검색을 위한 입력 상자
         rx.button(
             "Search",
             on_click = HomeState.map_search,
             border_radius="1em",
             box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-            background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
+            background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
             box_sizing="border-box",
             color="white",
-            opacity=1,
-            _hover={"opacity": 0.6},
+            opacity="0.6",
+            _hover={"opacity": 1},
         ),
         rx.button(
             "clear",
             on_click = HomeState.map_clear,
             border_radius="1em",
             box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-            background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
+            background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
             box_sizing="border-box",
             color="white",
-            opacity=1,
-            _hover={"opacity": 0.6},
+            opacity="0.6",
+            _hover={"opacity": 1},
         ),
         justify="space-between",
         p=4,
@@ -162,10 +185,13 @@ def feed(HomeState):
     return rx.box(
         feed_header(HomeState),
         rx.container(height='10px'),
-        rx.html(HomeState.map_iframe),
+        rx.data_table(
+            data=HomeState.df,
+            font_size = '8px',
+        ),
+        border_x="3px solid #ededed",
         h="100%",
     )
-
 
 # 홈 페이지
 def maps():
@@ -174,6 +200,7 @@ def maps():
         rx.grid(
             tabs(),
             feed(HomeState),
+            sidebar(HomeState),
             grid_template_columns="1fr 4fr 1fr",
             h="100vh",
             gap=4,

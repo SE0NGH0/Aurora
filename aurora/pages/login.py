@@ -78,7 +78,7 @@ def login():
                     ), 
                     rx.text(
                         "Don't have an account yet?   ",
-                        rx.link("Sign up!", href="/signup", color="green.500"),
+                        rx.link("Sign up!", href="/signup", color="blue.500"),
                         color="gray.600",
                     ),
                     rx.container(height='30px') ,  
@@ -97,7 +97,7 @@ def login():
         maxHeight='auto',
         height='100vh',
         style={
-            'background-image':"url('/aurora2.jpg')",
+            'background-image':"url('/aurora1.jpg')",
             'background-size':'cover',
         }
     )

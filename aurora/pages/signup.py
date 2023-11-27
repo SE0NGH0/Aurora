@@ -6,7 +6,7 @@ from aurora.state.auth import AuthState
 def signup():
     """The sign up page."""
     return rx.container(
-        rx.container(height='200px'),
+        rx.container(height='210px'),
         rx.vstack(
             rx.hstack(
                 rx.vstack(
@@ -95,7 +95,7 @@ def signup():
         maxHeight='auto',
         height='100vh',
         style={
-            'background-image':"url('/aurora.jpg')",
+            'background-image':"url('/aurora1.jpg')",
             'background-size':'cover',
         }
     )
