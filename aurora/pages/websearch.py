@@ -66,7 +66,7 @@ def tab_button4(name, href):
 def tab_button5(name, href):
     """A tab switcher button."""
     return rx.link(
-        rx.icon(tag="info", mr=2),  # 별 모양 아이콘
+        rx.icon(tag="info_outline", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
         display="inline-flex",
         align_items="center",
@@ -80,7 +80,7 @@ def tab_button5(name, href):
 def tab_button6(name, href):
     """A tab switcher button."""
     return rx.link(
-        rx.icon(tag="question", mr=2),  # 별 모양 아이콘
+        rx.icon(tag="question_outline", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
         display="inline-flex",
         align_items="center",
@@ -115,7 +115,7 @@ def tabs():
             ),
             tab_button1("Home", "/"),  # Home 탭 버튼
             tab_button2("My Profile","/myprofile"),
-            tab_button3("Web search","/websearch"),
+            tab_button3("Web Search","/websearch"),
             tab_button4("Video","/video"),
             tab_button5("Maps","/maps"),
             tab_button6("Ai Chat","/aichat"),
