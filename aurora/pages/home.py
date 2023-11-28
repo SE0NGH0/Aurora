@@ -95,7 +95,7 @@ def tab_button6(name, href):
 def tab_button7(name, href):
     """A tab switcher button."""
     return rx.link(
-        rx.icon(tag="question_outline", mr=2),  # 별 모양 아이콘
+        rx.icon(tag="email", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
         display="inline-flex",
         align_items="center",

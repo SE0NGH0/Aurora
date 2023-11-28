@@ -96,7 +96,7 @@ def tab_button6(name, href):
 def tab_button7(name, href):
     """A tab switcher button."""
     return rx.link(
-        rx.icon(tag="question_outline", mr=2),  # 별 모양 아이콘
+        rx.icon(tag="email", mr=2),  # 별 모양 아이콘
         name,  # 버튼 텍스트
         display="inline-flex",
         align_items="center",
@@ -165,19 +165,19 @@ def feed_header(HomeState):
         rx.heading("Chat", size="md"),  # 피드의 제목
         rx.input(on_blur=HomeState.set_receive_user, placeholder="Please enter the person you would like to send the message to!"),  # 트윗 검색을 위한 입력 상자
         rx.button(
-            "select",
+            "Select",
             on_click = HomeState.get_messages,
             border_radius="1em",
-            box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-            background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+            box_shadow="rgba(0, 255, 0, 0.8) 0 15px 15px -10px",
+            background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
             box_sizing="border-box",
             color="white",
-            opacity="0.6",
-            _hover={"opacity": 1},
+            opacity=1,
+            _hover={"opacity": 0.6},
         ),
         justify="space-between",
         p=4,
-        border_bottom="3px solid #ededed",
+        border_bottom="3px solid #000000",
     )
 
 # 개별 트윗을 표시하는 함수
@@ -242,18 +242,17 @@ def feed(HomeState):
         rx.hstack(
             rx.input(on_blur=HomeState.set_kakaotalk, placeholder="Write Message!"),
             rx.button(
-                'send',
+                'Send',
                 on_click = HomeState.sending_message,
                 border_radius="1em",
-                box_shadow="rgba(151, 65, 252, 0.8) 0 15px 30px -10px",
-                background_image="linear-gradient(144deg,#AF40FF,#5B42F3 50%,#00DDEB)",
+                box_shadow="rgba(0, 255, 0, 0.8) 0 15px 15px -10px",
+                background_image="-webkit-linear-gradient(-45deg, #77e67d, #3c8552)",
                 box_sizing="border-box",
                 color="white",
-                opacity="0.6",
-                _hover={"opacity": 1},
+                opacity=1,
+                _hover={"opacity": 0.6},
             )
         ),
-        border_x="3px solid #ededed",
         h="100%",
     )
 

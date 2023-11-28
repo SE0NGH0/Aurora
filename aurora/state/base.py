@@ -41,7 +41,7 @@ class GPT(rx.Model, table=True):
     created_at : str = Field() #질문 시각을 저장하는 영역
     
 #Message 모델 생성
-class message(rx.Model, table=True):
+class Message(rx.Model, table=True):
     send_user:str = Field() # 메시지를 보낸 사람을 저장하는 영역
     receive_user:str = Field() # 메시지를 받은 사람을 저장하는 영역
     message:str = Field() # 메시지 내용

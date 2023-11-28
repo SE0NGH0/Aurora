@@ -1,7 +1,7 @@
 """The state for the home page."""
 from datetime import datetime
 import reflex as rx
-from .base import Follows, State, Tweet, User, GPT, Profile, message
+from .base import Follows, State, Tweet, User, GPT, Profile, Message
 import os,json
 import tkinter as tk
 from tkinter import filedialog
@@ -66,14 +66,15 @@ class HomeState(State):
     receive_user:str=''
     message_img:list[str]
     message_files:list[str]=[]
-    messages:list[message]= []
+    messages:list[Message]= []
     
     
     # 파일 선택함수
     def handle_file_selection(self):                                          
-        root = tk.Tk()                                                        # 파일 선택 대화상자 열기
-        root.withdraw()                                                       # 화면에 창을 보이지 않도록 함
-        file_paths = filedialog.askopenfilenames()
+        root = tk.Tk()
+        root.withdraw()  # 화면에 창을 보이지 않도록 함
+        root.attributes('-topmost', True)
+        file_paths = filedialog.askopenfilenames(master=root)
 
         # 선택된 파일 경로에 대한 처리
         for file_path in file_paths:
@@ -123,7 +124,7 @@ class HomeState(State):
         
         
         with rx.session() as session:
-            send_message = message(
+            send_message = Message(
                 send_user = self.user.username,
                 receive_user = self.receive_user,
                 message = self.kakaotalk,
@@ -139,24 +140,24 @@ class HomeState(State):
     def get_messages(self):
         """Get tweets from the database."""
         with rx.session() as session:
-            self.messages = (session.query(message)
+            self.messages = (session.query(Message)
                 .filter(
                     or_(
                         and_(
-                            message.send_user == self.user.username,
-                            message.receive_user == self.receive_user,
+                            Message.send_user == self.user.username,
+                            Message.receive_user == self.receive_user,
                         ),
                         and_(
-                            message.send_user == self.receive_user,
-                            message.receive_user == self.user.username,
+                            Message.send_user == self.receive_user,
+                            Message.receive_user == self.user.username,
                         )
                     )
                 )
-                .all()[::-1]                       # session에 저장된 모든 story를 가져옴 
+                .all()[::]                       # session에 저장된 모든 story를 가져옴 
             )     
         
     @rx.var
-    def syn_messages(self)->list[message]:
+    def syn_messages(self)->list[Message]:
         return self.messages
         
     
