@@ -1,7 +1,7 @@
 """The state for the home page."""
 from datetime import datetime
 import reflex as rx
-from .base import Follows, State, Tweet, User, GPT, Profile
+from .base import Follows, State, Tweet, User, GPT, Profile, message
 import os,json
 import tkinter as tk
 from tkinter import filedialog
@@ -16,6 +16,7 @@ import re
 import urllib.request
 import sys
 from PyKakao import KoGPT
+from sqlalchemy import or_,and_
 
 class HomeState(State):
     """The state for the home page."""
@@ -61,13 +62,18 @@ class HomeState(State):
     checked: bool = False
     is_checked: bool = "Public Account!"
     
+    kakaotalk:str=''
+    receive_user:str=''
+    message_img:list[str]
+    message_files:list[str]=[]
+    messages:list[message]= []
+    
     
     # 파일 선택함수
     def handle_file_selection(self):                                          
-        root = tk.Tk()
-        root.withdraw()  # 화면에 창을 보이지 않도록 함
-        root.attributes('-topmost', True)
-        file_paths = filedialog.askopenfilenames(master=root)
+        root = tk.Tk()                                                        # 파일 선택 대화상자 열기
+        root.withdraw()                                                       # 화면에 창을 보이지 않도록 함
+        file_paths = filedialog.askopenfilenames()
 
         # 선택된 파일 경로에 대한 처리
         for file_path in file_paths:
@@ -107,6 +113,52 @@ class HomeState(State):
     async def file_select_cancel(self):
         self.img=[]
         self.files=[]
+        
+    # 메시지를 보내는 함수
+    def sending_message(self):
+        if not self.logged_in:
+            return rx.window_alert("Please log in to send a message")
+        if len(self.kakaotalk)==0:
+            return rx.window_alert('Please write at least one character!')
+        
+        
+        with rx.session() as session:
+            send_message = message(
+                send_user = self.user.username,
+                receive_user = self.receive_user,
+                message = self.kakaotalk,
+                created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                read = False
+            )
+            session.add(send_message)
+            session.commit()
+            self.kakaotalk = ''
+        return self.get_messages()
+    
+    # 메시지 내역을 불러오는 함수
+    def get_messages(self):
+        """Get tweets from the database."""
+        with rx.session() as session:
+            self.messages = (session.query(message)
+                .filter(
+                    or_(
+                        and_(
+                            message.send_user == self.user.username,
+                            message.receive_user == self.receive_user,
+                        ),
+                        and_(
+                            message.send_user == self.receive_user,
+                            message.receive_user == self.user.username,
+                        )
+                    )
+                )
+                .all()[::-1]                       # session에 저장된 모든 story를 가져옴 
+            )     
+        
+    @rx.var
+    def syn_messages(self)->list[message]:
+        return self.messages
+        
     
     #게시물 업로드 함수
     async def post_tweet(self):
@@ -115,7 +167,8 @@ class HomeState(State):
         if len(self.tweet)==0:
             return rx.window_alert('Please write at least one character!')           # story 추가시 최소 한 글자 입력 경고 메시지
         if len(self.tweet)>70:
-            return rx.window_alert('Please enter within 70 characters!') 
+            return rx.window_alert('Please enter within 70 characters!')            # 150글자 이내로 입력제한
+        
         await self.handle_upload(rx.upload_files())                                  # 이미지 추가
         
         with rx.session() as session:                                                # session에 생성한 story 모델 저장
@@ -575,16 +628,6 @@ class HomeState(State):
         max_tokens=300
         self.kogpt_response = api.generate(prompt, max_tokens, temperature = 0.01)['generations'][0]['text']
         
-        with rx.session() as session:                                                     # KoGPT의 응답을 데이터베이스에 저장
-            gpt = GPT(
-                author = 'KoGPT',
-                content=self.kogpt_response,
-                created_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            )
-            session.add(gpt)
-            session.commit()
-            self.kogpt_response=''
-
         with rx.session() as session:                                                     # 대화 내용을 데이터베이스에 저장
             gpt = GPT(
                 author=self.user.username,
@@ -595,6 +638,16 @@ class HomeState(State):
             session.add(gpt)
             session.commit()
             self.chat_input= ""
+            
+        with rx.session() as session:                                                     # KoGPT의 응답을 데이터베이스에 저장
+            gpt = GPT(
+                author = 'KoGPT',
+                content=self.kogpt_response,
+                created_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            )
+            session.add(gpt)
+            session.commit()
+            self.kogpt_response=''
             
         return self.get_gpt()                                                             # 최신 대화 기록 반환
     
@@ -654,11 +707,6 @@ class HomeState(State):
         self.users_name = profile[0].user_name
         self.users_status_message = profile[0].user_status_message
         self.users_account_status= profile[0].user_account_status
-
-        print(self.users_id)
-        print(self.users_name)
-        print(self.users_status_message)
-        print(self.users_account_status)
         
     def change1(self):
         self.show = not (self.show)
