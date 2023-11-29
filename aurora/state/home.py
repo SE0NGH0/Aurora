@@ -490,9 +490,9 @@ class HomeState(State):
         self.Naver_client_id = key['key']                                                  # 클래스 속성에 네이버 API 클라이언트 ID 저장
         
         key1 = ''
-        with open('Naver_client_secret.json','r') as f:                                    # 'Naver_client_secret.json' 파일에서 클라이언트 시크릿 읽어오기
+        with open('naverclientsecret.json','r') as f:                                    # 'Naver_client_secret.json' 파일에서 클라이언트 시크릿 읽어오기
             key1 = json.load(f)
-        self.Google_SEARCH_ENGINE_ID = key1['key']                                         # 클래스 속성에 네이버 API 클라이언트 시크릿 저장
+        self.Naver_client_secret = key1['key']                                         # 클래스 속성에 네이버 API 클라이언트 시크릿 저장
     
     # Naver API 를 활용한 웹 크롤링 함수
     def Naver_API(self,query,wanted_row):
@@ -503,7 +503,7 @@ class HomeState(State):
         end=wanted_row+10000
         idx=0
         sort='sim'
-
+        self.naver_api()
         df= pd.DataFrame(columns=['Title','Link','Description'])                           # 결과를 저장할 데이터프레임 생성
         row_count= 0                                                                       # 검색 결과 횟수 초기화
         
@@ -533,7 +533,7 @@ class HomeState(State):
                             df.loc[idx] =[title,link,description]
                             idx+=1                                                         # 검색 결과 횟수 증가
                             row_count+=1
-                            if (row_count >= wanted_row) or (row_count == 300):            # 원하는 행 수에 도달하거나 최대 300개의 결과를 수집한 경우 반환
+                            if (row_count >= wanted_row) or (row_count == 30):            # 원하는 행 수에 도달하거나 최대 30개의 결과를 수집한 경우 반환
                                 return df
                             
             except:
