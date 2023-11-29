@@ -474,7 +474,7 @@ class HomeState(State):
                         
                         df_google.loc[start_page + i] = [title,link,description]           # 결과를 데이터프레임에 추가
                         row_count+=1                                                       # 검색 결과 횟수 증가
-                        if (row_count >= wanted_row) or (row_count == 300) :               # 원하는 행 수에 도달하거나 최대 300개의 결과를 수집한 경우 반환
+                        if (row_count >= wanted_row) or (row_count == 100) :               # 원하는 행 수에 도달하거나 최대 300개의 결과를 수집한 경우 반환
                             return df_google
             except:
                 return df_google
@@ -533,7 +533,7 @@ class HomeState(State):
                             df.loc[idx] =[title,link,description]
                             idx+=1                                                         # 검색 결과 횟수 증가
                             row_count+=1
-                            if (row_count >= wanted_row) or (row_count == 30):            # 원하는 행 수에 도달하거나 최대 30개의 결과를 수집한 경우 반환
+                            if (row_count >= wanted_row) or (row_count == 100):            # 원하는 행 수에 도달하거나 최대 30개의 결과를 수집한 경우 반환
                                 return df
                             
             except:
@@ -568,7 +568,7 @@ class HomeState(State):
                     description = item["contents"]
                     df.loc[10*page+i] =[title,link,description]                            # 결과를 데이터프레임에 추가
                     row_count+=1                                                           # 검색 결과 횟수 증가
-                    if (row_count >= wanted_row) or (row_count == 300):                    # 원하는 행 수에 도달하거나 최대 300개의 결과를 수집한 경우 반환
+                    if (row_count >= wanted_row) or (row_count == 100):                    # 원하는 행 수에 도달하거나 최대 300개의 결과를 수집한 경우 반환
                         remove_tag = re.compile('<.*?>')                                  
                         df['Title'] =df['Title'].apply(lambda x :re.sub(remove_tag, '',x))
                         df['Description'] =df['Description'].apply(lambda x :re.sub(remove_tag, '',x))
